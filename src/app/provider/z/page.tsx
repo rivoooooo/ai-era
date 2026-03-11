@@ -14,14 +14,14 @@ export default function ZPage() {
               className="block p-3 border border-[#1f521f] hover:border-[#33ff00] transition-colors cursor-pointer"
             >
               <span className="text-glow">&gt; z-ai-max</span>
-              <span className="block text-xs opacity-60">$ 旗舰模型</span>
+              <span className="block text-xs opacity-60">$ Max Model</span>
             </Link>
             <Link
               href="#"
               className="block p-3 border border-[#1f521f] hover:border-[#33ff00] transition-colors cursor-pointer"
             >
               <span className="text-glow">&gt; z-ai-pro</span>
-              <span className="block text-xs opacity-60">$ 专业模型</span>
+              <span className="block text-xs opacity-60">$ Pro Model</span>
             </Link>
           </div>
         </div>
@@ -37,7 +37,7 @@ export default function ZPage() {
             className="block p-3 border border-[#1f521f] hover:border-[#33ff00] transition-colors cursor-pointer"
           >
             <span className="text-glow">&gt; API Configuration</span>
-            <span className="block text-xs opacity-60">$ 配置 Z AI API</span>
+            <span className="block text-xs opacity-60">$ Configure Z AI API</span>
           </Link>
         </div>
       </div>

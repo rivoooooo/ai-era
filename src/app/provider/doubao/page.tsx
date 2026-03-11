@@ -14,14 +14,14 @@ export default function DoubaoPage() {
               className="block p-3 border border-[#1f521f] hover:border-[#33ff00] transition-colors cursor-pointer"
             >
               <span className="text-glow">&gt; doubao-pro</span>
-              <span className="block text-xs opacity-60">$ 专业模型</span>
+              <span className="block text-xs opacity-60">$ Pro Model</span>
             </Link>
             <Link
               href="#"
               className="block p-3 border border-[#1f521f] hover:border-[#33ff00] transition-colors cursor-pointer"
             >
               <span className="text-glow">&gt; doubao-lite</span>
-              <span className="block text-xs opacity-60">$ 轻量模型</span>
+              <span className="block text-xs opacity-60">$ Lite Model</span>
             </Link>
           </div>
         </div>
@@ -37,7 +37,7 @@ export default function DoubaoPage() {
             className="block p-3 border border-[#1f521f] hover:border-[#33ff00] transition-colors cursor-pointer"
           >
             <span className="text-glow">&gt; API Configuration</span>
-            <span className="block text-xs opacity-60">$ 配置 Doubao API</span>
+            <span className="block text-xs opacity-60">$ Configure Doubao API</span>
           </Link>
         </div>
       </div>

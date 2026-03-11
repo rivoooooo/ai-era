@@ -73,15 +73,15 @@ export default function GoogleSettingsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               <div className="p-2 border border-[#1f521f]">
                 <span className="text-glow">&gt; gemini-2.5-flash</span>
-                <span className="block text-xs opacity-60">$ 快速响应</span>
+                <span className="block text-xs opacity-60">$ Fast Response</span>
               </div>
               <div className="p-2 border border-[#1f521f]">
                 <span className="text-glow">&gt; gemini-3-pro</span>
-                <span className="block text-xs opacity-60">$ 高级模型</span>
+                <span className="block text-xs opacity-60">$ Advanced Model</span>
               </div>
               <div className="p-2 border border-[#1f521f]">
                 <span className="text-glow">&gt; gemini-2.0-flash</span>
-                <span className="block text-xs opacity-60">$ 均衡选择</span>
+                <span className="block text-xs opacity-60">$ Balanced Option</span>
               </div>
             </div>
           </div>

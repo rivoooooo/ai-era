@@ -73,11 +73,11 @@ export default function DoubaoSettingsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               <div className="p-2 border border-[#1f521f]">
                 <span className="text-glow">&gt; doubao-pro</span>
-                <span className="block text-xs opacity-60">$ 专业模型</span>
+                <span className="block text-xs opacity-60">$ Pro Model</span>
               </div>
               <div className="p-2 border border-[#1f521f]">
                 <span className="text-glow">&gt; doubao-lite</span>
-                <span className="block text-xs opacity-60">$ 轻量模型</span>
+                <span className="block text-xs opacity-60">$ Lite Model</span>
               </div>
             </div>
           </div>

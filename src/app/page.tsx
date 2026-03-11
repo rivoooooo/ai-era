@@ -30,7 +30,7 @@ const categories: Category[] = [
   {
     name: "FRONTEND PRINCIPLES",
     description: "Core frontend fundamentals",
-    icon: "[原理]",
+    icon: "[FUNDAMENTALS]",
     challenges: [
       { name: "event-loop", description: "JavaScript Event Loop", href: "/challenge/event-loop", difficulty: "MEDIUM" },
       { name: "closure-mastery", description: "Deep dive into Closures", href: "/challenge/closure-mastery", difficulty: "MEDIUM" },
@@ -42,7 +42,7 @@ const categories: Category[] = [
   {
     name: "PERFORMANCE",
     description: "Web performance optimization",
-    icon: "[性能]",
+    icon: "[PERF]",
     challenges: [
       { name: "bundle-analysis", description: "Analyze and optimize bundles", href: "/challenge/bundle-analysis", difficulty: "MEDIUM" },
       { name: "lazy-loading", description: "Code splitting strategies", href: "/challenge/lazy-loading", difficulty: "EASY" },
@@ -53,7 +53,7 @@ const categories: Category[] = [
   {
     name: "NETWORK",
     description: "HTTP & network protocols",
-    icon: "[网络]",
+    icon: "[NET]",
     challenges: [
       { name: "http-basics", description: "HTTP methods & status codes", href: "/challenge/http-basics", difficulty: "EASY" },
       { name: "cors-deep-dive", description: "CORS preflight & policies", href: "/challenge/cors-deep-dive", difficulty: "MEDIUM" },
@@ -64,7 +64,7 @@ const categories: Category[] = [
   {
     name: "CSS MASTERY",
     description: "Advanced CSS techniques",
-    icon: "[样式]",
+    icon: "[CSS]",
     challenges: [
       { name: "grid-layout", description: "CSS Grid deep dive", href: "/challenge/grid-layout", difficulty: "MEDIUM" },
       { name: "flexbox-mastery", description: "Flexbox advanced patterns", href: "/challenge/flexbox-mastery", difficulty: "EASY" },
@@ -75,7 +75,7 @@ const categories: Category[] = [
   {
     name: "TOOLING",
     description: "Build tools & dev workflow",
-    icon: "[工具]",
+    icon: "[TOOLS]",
     challenges: [
       { name: "webpack-basics", description: "Webpack configuration", href: "/challenge/webpack-basics", difficulty: "MEDIUM" },
       { name: "vite-mastery", description: "Vite plugin development", href: "/challenge/vite-mastery", difficulty: "HARD" },
@@ -144,7 +144,7 @@ export default function Home() {
             {`$ ./start_challenge.sh --category=all --difficulty=expert`}
           </p>
           <p className="text-xs md:text-sm opacity-40 max-w-xl mx-auto">
-            前端开发者考验集合 / Frontend Developer Challenge Platform
+            Frontend Developer Challenge Platform
           </p>
         </div>
 

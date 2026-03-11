@@ -13,7 +13,7 @@ export default function GooglePage() {
             className="block p-3 border border-[#1f521f] hover:border-[#33ff00] transition-colors mb-2 cursor-pointer"
           >
             <span className="text-glow">&gt; gemini-2.5-flash</span>
-            <span className="block text-xs opacity-60">$ 快速响应</span>
+            <span className="block text-xs opacity-60">$ Fast Response</span>
           </Link>
         </div>
       </div>
@@ -28,7 +28,7 @@ export default function GooglePage() {
             className="block p-3 border border-[#1f521f] hover:border-[#33ff00] transition-colors cursor-pointer"
           >
             <span className="text-glow">&gt; API Configuration</span>
-            <span className="block text-xs opacity-60">$ 配置 Google AI API</span>
+            <span className="block text-xs opacity-60">$ Configure Google AI API</span>
           </Link>
         </div>
       </div>

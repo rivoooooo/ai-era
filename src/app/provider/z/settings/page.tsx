@@ -73,11 +73,11 @@ export default function ZAISettingsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               <div className="p-2 border border-[#1f521f]">
                 <span className="text-glow">&gt; z-ai-max</span>
-                <span className="block text-xs opacity-60">$ 旗舰模型</span>
+                <span className="block text-xs opacity-60">$ Max Model</span>
               </div>
               <div className="p-2 border border-[#1f521f]">
                 <span className="text-glow">&gt; z-ai-pro</span>
-                <span className="block text-xs opacity-60">$ 专业模型</span>
+                <span className="block text-xs opacity-60">$ Pro Model</span>
               </div>
             </div>
           </div>
