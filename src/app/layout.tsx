@@ -1,8 +1,11 @@
-import type { Metadata } from "next";
-import { JetBrains_Mono, Geist } from "next/font/google";
-import "./globals.css";
-import { cn } from "@/lib/utils";
-import { CommandPaletteWrapper } from "@/components/command-palette";
+import type { Metadata } from 'next';
+import { JetBrains_Mono, Geist } from 'next/font/google';
+import './globals.css';
+import { cn } from '@/lib/utils';
+import { CommandPaletteWrapper } from '@/components/command-palette';
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
+import { getLocale } from 'next-intl/server';
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -16,13 +19,16 @@ export const metadata: Metadata = {
   description: "AI ERA - Frontend Developer Challenge Platform, includes AI and fundamentals challenges",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
-    <html lang="zh-CN" suppressHydrationWarning className={cn("font-sans", geist.variable)}>
+    <html lang={locale} suppressHydrationWarning className={cn("font-sans", geist.variable)}>
       <body
         className={`${jetbrains.variable} antialiased`}
         style={{ 
@@ -31,8 +37,10 @@ export default function RootLayout({
           color: "var(--foreground)"
         }}
       >
-        {children}
-        <CommandPaletteWrapper />
+        <NextIntlClientProvider messages={messages}>
+          {children}
+          <CommandPaletteWrapper />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

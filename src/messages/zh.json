@@ -1,0 +1,18 @@
+{
+  "common": {
+    "back": "返回",
+    "home": "首页",
+    "language": "语言",
+    "chinese": "中文",
+    "english": "英文"
+  },
+  "header": {
+    "title": "AI ERA - 前端开发者挑战平台",
+    "description": "AI ERA - 前端开发者挑战平台，包含AI和基础挑战"
+  },
+  "provider": {
+    "google": "Google AI",
+    "doubao": "豆包",
+    "z": "Z API"
+  }
+}

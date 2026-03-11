@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ReactNode, useMemo } from "react";
 import { providerConfig } from "./config";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 interface ProviderLayoutProps {
   children: ReactNode;
@@ -61,12 +62,15 @@ export default function ProviderLayout({ children }: ProviderLayoutProps) {
               {title}
             </h1>
 
-            <Link
-              href="/"
-              className="text-sm text-[#33ff00] hover:text-glow transition-all px-2 py-1 border border-transparent hover:border-[#33ff00]"
-            >
-              HOME
-            </Link>
+            <div className="flex items-center gap-4">
+              <Link
+                href="/"
+                className="text-sm text-[#33ff00] hover:text-glow transition-all px-2 py-1 border border-transparent hover:border-[#33ff00]"
+              >
+                HOME
+              </Link>
+              <LanguageSwitcher />
+            </div>
           </div>
         </div>
       </nav>
