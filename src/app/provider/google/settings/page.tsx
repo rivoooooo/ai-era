@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function GoogleSettingsPage() {
   return (
-    <main className="min-h-screen p-4 md:p-8">
+    <main className="min-h-screen ">
       <div className="scanlines" />
 
       <div className="max-w-4xl mx-auto">

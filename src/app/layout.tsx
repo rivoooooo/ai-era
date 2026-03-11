@@ -8,7 +8,7 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AI API 测试",
+  title: "AI ERA",
   description: "AI API 测试应用",
 };
 
