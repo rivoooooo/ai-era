@@ -1,24 +1,42 @@
-export interface ChallengeCode {
-  html: string;
-  css: string;
-  js: string;
+export interface ChallengeFile {
+  filename: string;
+  language: string;
+  content: string;
+}
+
+export interface ChallengeResource {
+  id: string;
+  challengeId: string;
+  type: string;
+  importSource: string;
+  initCode: ChallengeFile[];
+  codeSource: ChallengeFile[];
 }
 
 export interface ChallengeConfig {
   id: string;
   title: string;
   description: string;
-  defaultCode: ChallengeCode;
-  dependencies?: string[];
-  modules?: string[];
+  initCode: ChallengeFile[];
+  codeSource: ChallengeFile[];
+  importSource: string;
 }
-
-const challengesData: Record<string, ChallengeConfig> = {};
 
 export async function getChallengeConfig(slug: string): Promise<ChallengeConfig | null> {
-  return challengesData[slug] || null;
-}
+  const { getChallengeWithResources } = await import('@/server/lib/db/queries');
+  
+  const challenge = await getChallengeWithResources(slug, 'en');
+  
+  if (!challenge) return null;
 
-export function getAllChallenges(): ChallengeConfig[] {
-  return Object.values(challengesData);
+  const resource = challenge.resources?.[0];
+  
+  return {
+    id: challenge.id,
+    title: challenge.name,
+    description: challenge.description || '',
+    initCode: resource?.initCode || [],
+    codeSource: resource?.codeSource || [],
+    importSource: resource?.importSource || '',
+  };
 }

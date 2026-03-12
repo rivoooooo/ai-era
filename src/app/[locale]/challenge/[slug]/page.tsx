@@ -3,6 +3,7 @@
 import { useState, use, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import { EmptyState } from '@/components/ui/empty';
 
 const localeToLanguage: Record<string, string> = {
   'zh': 'zh',
@@ -94,6 +95,17 @@ function ChallengeContent({
     }
   }, [typeParam]);
 
+  const hasName = !!challengeData?.name;
+  const hasDescription = !!challengeData?.description;
+  const hasDifficulty = !!challengeData?.difficulty;
+  const hasCategory = !!challengeData?.category?.name;
+  const hasResources = challengeData?.resources && challengeData.resources.length > 0;
+  const currentResource = challengeData?.resources?.find(r => r.type === selectedType);
+  const availableTypes = challengeData?.resources?.map(r => r.type) || [];
+  const currentFiles = currentResource?.initCode || currentResource?.codeSource || [];
+  const hasFiles = currentFiles.length > 0;
+  const currentFile = currentFiles[selectedFileIndex];
+
   if (loading) {
     return (
       <div className="min-h-screen bg-[var(--background)] p-4 md:p-8 flex items-center justify-center">
@@ -104,28 +116,20 @@ function ChallengeContent({
 
   if (error || !challengeData) {
     return (
-      <div className="min-h-screen bg-[var(--background)] p-4 md:p-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="card-terminal">
-            <div className="card-terminal-header">
-              +-- ERROR --+
-            </div>
-            <div className="p-8 text-center">
-              <p className="text-lg mb-4">{error || 'Challenge not found'}</p>
-              <Link href={`/${locale}/challenge`} className="btn-terminal inline-block">
-                [BACK TO CHALLENGES]
-              </Link>
-            </div>
-          </div>
-        </div>
+      <div className="min-h-screen bg-[var(--background)] p-4 md:p-8 flex items-center justify-center">
+        <EmptyState
+          variant="error"
+          title="Challenge Not Found"
+          description={error || "The challenge you're looking for doesn't exist or couldn't be loaded."}
+          action={
+            <Link href={`/${locale}/challenge`} className="btn-terminal text-sm px-4 py-2">
+              [BACK TO CHALLENGES]
+            </Link>
+          }
+        />
       </div>
     );
   }
-
-  const currentResource = challengeData.resources.find(r => r.type === selectedType);
-  const availableTypes = challengeData.resources.map(r => r.type);
-  const currentFiles = currentResource?.initCode || currentResource?.codeSource || [];
-  const currentFile = currentFiles[selectedFileIndex];
 
   const handleFullscreen = () => {
     setIsFullscreen(!isFullscreen);
@@ -186,106 +190,164 @@ ${jsxFile.content.replace(/import .+ from .+/g, '').replace(/export default/g, '
               <span className="text-[var(--muted-foreground)]">({lang})</span>
             </div>
             
-            <h1 className="text-2xl md:text-3xl font-bold text-glow mb-2">
-              {challengeData.name}
-            </h1>
-            <p className="text-sm opacity-60 mb-4">{challengeData.description}</p>
+            {hasName ? (
+              <h1 className="text-2xl md:text-3xl font-bold text-glow mb-2">
+                {challengeData.name}
+              </h1>
+            ) : (
+              <h1 className="text-2xl md:text-3xl font-bold text-[var(--muted-foreground)] mb-2">
+                Untitled Challenge
+              </h1>
+            )}
+            
+            {hasDescription ? (
+              <p className="text-sm opacity-60 mb-4">{challengeData.description}</p>
+            ) : (
+              <p className="text-sm opacity-60 mb-4 italic">No description available</p>
+            )}
             
             <div className="flex flex-wrap gap-4 text-xs">
-              <span 
-                className="px-2 py-1 font-bold"
-                style={{ 
-                  color: difficultyColors[challengeData.difficulty],
-                  border: `1px solid ${difficultyColors[challengeData.difficulty]}`
-                }}
-              >
-                {challengeData.difficulty}
-              </span>
-              <span className="opacity-60 py-1">{challengeData.category?.name}</span>
+              {hasDifficulty ? (
+                <span 
+                  className="px-2 py-1 font-bold"
+                  style={{ 
+                    color: difficultyColors[challengeData.difficulty],
+                    border: `1px solid ${difficultyColors[challengeData.difficulty]}`
+                  }}
+                >
+                  {challengeData.difficulty}
+                </span>
+              ) : (
+                <span className="px-2 py-1 font-bold opacity-50">Unknown Difficulty</span>
+              )}
+              {hasCategory ? (
+                <span className="opacity-60 py-1">{challengeData.category?.name}</span>
+              ) : (
+                <span className="opacity-60 py-1 italic">No category</span>
+              )}
             </div>
           </div>
 
-          {availableTypes.length > 0 && (
-            <div className="card-terminal mb-4">
-              <div className="card-terminal-header shrink-0">
-                +-- 选择技术栈 --+
-              </div>
-              <div className="p-4">
-                <div className="flex flex-wrap gap-2">
-                  {availableTypes.map((type) => (
-                    <button
-                      key={type}
-                      onClick={() => {
-                        setSelectedType(type);
-                        setSelectedFileIndex(0);
-                      }}
-                      className={`px-3 py-1.5 text-sm font-bold transition-all ${
-                        selectedType === type 
-                          ? 'bg-[var(--primary)] text-[var(--primary-foreground)]' 
-                          : 'bg-[var(--muted)] hover:bg-[var(--accent)]'
-                      }`}
-                    >
-                      {typeLabels[type]?.[lang as 'zh' | 'en'] || type}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-
-          {currentResource && (
+          {hasResources ? (
             <>
-              {currentResource.importSource && (
+              {availableTypes.length > 0 && (
                 <div className="card-terminal mb-4">
                   <div className="card-terminal-header shrink-0">
-                    +-- 依赖引入 --+
+                    +-- 选择技术栈 --+
                   </div>
                   <div className="p-4">
-                    <pre className="text-xs bg-[var(--background)] p-3 rounded overflow-x-auto">
-                      <code className="text-[var(--primary)]">{currentResource.importSource}</code>
-                    </pre>
+                    <div className="flex flex-wrap gap-2">
+                      {availableTypes.map((type) => (
+                        <button
+                          key={type}
+                          onClick={() => {
+                            setSelectedType(type);
+                            setSelectedFileIndex(0);
+                          }}
+                          className={`px-3 py-1.5 text-sm font-bold transition-all ${
+                            selectedType === type 
+                              ? 'bg-[var(--primary)] text-[var(--primary-foreground)]' 
+                              : 'bg-[var(--muted)] hover:bg-[var(--accent)]'
+                          }`}
+                        >
+                          {typeLabels[type]?.[lang as 'zh' | 'en'] || type}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
               )}
 
-              {currentFiles.length > 0 && (
+              {currentResource && (
                 <>
-                  <div className="card-terminal mb-4">
-                    <div className="card-terminal-header shrink-0">
-                      +-- 文件列表 --+
-                    </div>
-                    <div className="p-4">
-                      <div className="flex flex-wrap gap-2">
-                        {currentFiles.map((file, index) => (
-                          <button
-                            key={file.filename}
-                            onClick={() => setSelectedFileIndex(index)}
-                            className={`px-3 py-1.5 text-xs font-bold transition-all ${
-                              selectedFileIndex === index 
-                                ? 'bg-[var(--primary)] text-[var(--primary-foreground)]' 
-                                : 'bg-[var(--muted)] hover:bg-[var(--accent)]'
-                            }`}
-                          >
-                            {file.filename}
-                          </button>
-                        ))}
+                  {currentResource.importSource ? (
+                    <div className="card-terminal mb-4">
+                      <div className="card-terminal-header shrink-0">
+                        +-- 依赖引入 --+
+                      </div>
+                      <div className="p-4">
+                        <pre className="text-xs bg-[var(--background)] p-3 rounded overflow-x-auto">
+                          <code className="text-[var(--primary)]">{currentResource.importSource}</code>
+                        </pre>
                       </div>
                     </div>
-                  </div>
+                  ) : (
+                    <div className="card-terminal mb-4">
+                      <div className="card-terminal-header shrink-0">
+                        +-- 依赖引入 --+
+                      </div>
+                      <div className="p-4">
+                        <p className="text-xs text-[var(--muted-foreground)] italic">No import source available</p>
+                      </div>
+                    </div>
+                  )}
 
-                  <div className="card-terminal flex-1 overflow-auto">
-                    <div className="card-terminal-header shrink-0">
-                      +-- 代码编辑器: {currentFile?.filename} --+
+                  {hasFiles ? (
+                    <>
+                      <div className="card-terminal mb-4">
+                        <div className="card-terminal-header shrink-0">
+                          +-- 文件列表 --+
+                        </div>
+                        <div className="p-4">
+                          <div className="flex flex-wrap gap-2">
+                            {currentFiles.map((file, index) => (
+                              <button
+                                key={file.filename}
+                                onClick={() => setSelectedFileIndex(index)}
+                                className={`px-3 py-1.5 text-xs font-bold transition-all ${
+                                  selectedFileIndex === index 
+                                    ? 'bg-[var(--primary)] text-[var(--primary-foreground)]' 
+                                    : 'bg-[var(--muted)] hover:bg-[var(--accent)]'
+                                }`}
+                              >
+                                {file.filename}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="card-terminal flex-1 overflow-auto">
+                        <div className="card-terminal-header shrink-0">
+                          +-- 代码编辑器: {currentFile?.filename} --+
+                        </div>
+                        <div className="p-4">
+                          <pre className="text-xs bg-[var(--background)] p-3 rounded overflow-x-auto whitespace-pre-wrap">
+                            <code>{currentFile?.content || ''}</code>
+                          </pre>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="card-terminal mb-4">
+                      <div className="card-terminal-header shrink-0">
+                        +-- 文件列表 --+
+                      </div>
+                      <div className="p-4">
+                        <EmptyState
+                          variant="warning"
+                          title="No Files Available"
+                          description="This resource doesn't have any files."
+                        />
+                      </div>
                     </div>
-                    <div className="p-4">
-                      <pre className="text-xs bg-[var(--background)] p-3 rounded overflow-x-auto whitespace-pre-wrap">
-                        <code>{currentFile?.content || ''}</code>
-                      </pre>
-                    </div>
-                  </div>
+                  )}
                 </>
               )}
             </>
+          ) : (
+            <div className="card-terminal mb-4">
+              <div className="card-terminal-header shrink-0">
+                +-- 资源 --+
+              </div>
+              <div className="p-4">
+                <EmptyState
+                  variant="warning"
+                  title="No Resources Available"
+                  description="This challenge doesn't have any resources yet."
+                />
+              </div>
+            </div>
           )}
 
           <div className="mt-4 md:mt-6 flex flex-wrap gap-4 justify-center lg:justify-start">
@@ -298,7 +360,7 @@ ${jsxFile.content.replace(/import .+ from .+/g, '').replace(/export default/g, '
           </div>
         </div>
 
-        {currentResource && currentFiles.length > 0 && (
+        {currentResource && hasFiles ? (
           <div className={`${isFullscreen ? 'w-full lg:w-2/3' : 'w-full'} flex flex-col`}>
             <div className="card-terminal flex-1 min-h-[400px] md:min-h-[500px] lg:min-h-[600px] flex flex-col">
               <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--border)] shrink-0">
@@ -334,6 +396,16 @@ ${jsxFile.content.replace(/import .+ from .+/g, '').replace(/export default/g, '
                   title="Preview"
                 />
               </div>
+            </div>
+          </div>
+        ) : (
+          <div className={`${isFullscreen ? 'w-full lg:w-2/3' : 'w-full'} flex flex-col`}>
+            <div className="card-terminal flex-1 min-h-[400px] md:min-h-[500px] lg:min-h-[600px] flex items-center justify-center">
+              <EmptyState
+                variant="warning"
+                title="No Preview Available"
+                description={hasResources ? "This resource doesn't have preview files." : "No resources available for preview."}
+              />
             </div>
           </div>
         )}
