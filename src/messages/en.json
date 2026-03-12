@@ -31,28 +31,28 @@
   },
   "categories": {
     "ai": {
-      "name": "AI CHALLENGES",
-      "description": "Modern AI tools & prompt engineering"
+      "name": "",
+      "description": ""
     },
     "frontend": {
-      "name": "FRONTEND PRINCIPLES",
-      "description": "Core frontend fundamentals"
+      "name": "",
+      "description": ""
     },
     "performance": {
-      "name": "PERFORMANCE",
-      "description": "Web performance optimization"
+      "name": "",
+      "description": ""
     },
     "network": {
-      "name": "NETWORK",
-      "description": "HTTP & network protocols"
+      "name": "",
+      "description": ""
     },
     "css": {
-      "name": "CSS MASTERY",
-      "description": "Advanced CSS techniques"
+      "name": "",
+      "description": ""
     },
     "tooling": {
-      "name": "TOOLING",
-      "description": "Build tools & dev workflow"
+      "name": "",
+      "description": ""
     }
   },
   "difficulty": {
