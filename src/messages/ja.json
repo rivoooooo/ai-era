@@ -1,0 +1,117 @@
+{
+  "common": {
+    "back": "戻る",
+    "home": "ホーム",
+    "language": "言語",
+    "chinese": "中文",
+    "english": "English",
+    "zh": "中文",
+    "en": "English",
+    "ja": "日本語"
+  },
+  "header": {
+    "title": "AI ERA - フロントエンド開発者チャレンジプラットフォーム",
+    "description": "フロントエンド開発者チャレンジプラットフォーム"
+  },
+  "nav": {
+    "home": "ホーム",
+    "challenges": "チャレンジ",
+    "about": "概要"
+  },
+  "home": {
+    "subtitle": "$ ./start_challenge.sh --category=all --difficulty=expert"
+  },
+  "categories": {
+    "ai": {
+      "name": "AI チャレンジ",
+      "description": "最新のAIツールとプロンプトエンジニアリング"
+    },
+    "frontend": {
+      "name": "フロントエンド基礎",
+      "description": "コアなフロントエンドの基礎知識"
+    },
+    "performance": {
+      "name": "パフォーマンス",
+      "description": "Webパフォーマンス最適化"
+    },
+    "network": {
+      "name": "ネットワーク",
+      "description": "HTTPとネットワークプロトコル"
+    },
+    "css": {
+      "name": "CSS習得",
+      "description": "高度なCSS技術"
+    },
+    "tooling": {
+      "name": "ツールチェーン",
+      "description": "ビルドツールと開発ワークフロー"
+    }
+  },
+  "difficulty": {
+    "EASY": "簡単",
+    "MEDIUM": "中級",
+    "HARD": "難しい",
+    "EXPERT": "エキスパート"
+  },
+  "system": {
+    "categories": "カテゴリー",
+    "challenges": "チャレンジ",
+    "status": "ステータス",
+    "ready": "準備完了",
+    "difficulty": "難易度"
+  },
+  "provider": {
+    "google": "Google AI",
+    "doubao": "豆包",
+    "z": "Z AI"
+  },
+  "providerPage": {
+    "google": {
+      "title": "Google AI",
+      "description": "Google AI API テスト",
+      "geminiFlash": {
+        "title": "Gemini 2.5 Flash",
+        "description": "Google AI Flashモデル - 高速応答"
+      },
+      "settings": {
+        "title": "Google 設定",
+        "description": "Google AI API設定"
+      }
+    },
+    "doubao": {
+      "title": "豆包",
+      "description": "豆包 AI API テスト",
+      "settings": {
+        "title": "豆包設定",
+        "description": "豆包 API設定"
+      }
+    },
+    "z": {
+      "title": "Z AI",
+      "description": "Z AI API テスト",
+      "settings": {
+        "title": "Z AI 設定",
+        "description": "Z AI API設定"
+      }
+    }
+  },
+  "form": {
+    "apiKey": "API Key",
+    "enterApiKey": "API Keyを入力...",
+    "prompt": "プロンプト",
+    "enterPrompt": "プロンプトを入力...",
+    "model": "モデル",
+    "temperature": "Temperature",
+    "maxTokens": "最大トークン数",
+    "submit": "送信",
+    "response": "応答",
+    "error": "エラー",
+    "save": "保存",
+    "saved": "保存済み"
+  },
+  "chat": {
+    "title": "チャット",
+    "placeholder": "メッセージを入力...",
+    "send": "送信"
+  }
+}

@@ -18,17 +18,18 @@ interface LanguageSwitcherProps {
 export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
   const pathname = usePathname();
   
-  const currentLocale = pathname.startsWith('/en') ? 'en' : 'zh';
+  const currentLocale = pathname.startsWith('/en') ? 'en' : pathname.startsWith('/ja') ? 'ja' : 'zh';
   const t = languageSwitcherTranslations[currentLocale];
   
   const handleLanguageChange = (newLocale: string) => {
-    const pathWithoutLocale = pathname.replace(/^\/(zh|en)/, '');
+    const pathWithoutLocale = pathname.replace(/^\/(zh|en|ja)/, '');
     window.location.href = `/${newLocale}${pathWithoutLocale || '/'}`;
   };
 
   const languages = [
     { code: 'zh', name: languageSwitcherTranslations.zh.switchTo.zh },
-    { code: 'en', name: languageSwitcherTranslations.zh.switchTo.en }
+    { code: 'en', name: languageSwitcherTranslations.zh.switchTo.en },
+    { code: 'ja', name: languageSwitcherTranslations.zh.switchTo.ja }
   ];
 
   return (

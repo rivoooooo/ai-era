@@ -1,7 +1,7 @@
 import createProxy from 'next-intl/middleware';
 
 export default createProxy({
-  locales: ['zh', 'en'],
+  locales: ['zh', 'en', 'ja'],
   defaultLocale: 'zh',
   localePrefix: 'always'
 });
