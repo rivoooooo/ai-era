@@ -40,7 +40,7 @@ export default async function GoogleSettingsPage() {
           <div className="p-4">
             <div className="mb-4">
               <label className="block text-xs mb-2 opacity-60">
-                user@api-test:~$ GOOGLE_API_KEY
+                user@ai-era-web-dev-skills:~$ GOOGLE_API_KEY
               </label>
               <input
                 type="password"

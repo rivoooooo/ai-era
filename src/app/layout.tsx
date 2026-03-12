@@ -15,8 +15,8 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AI ERA - Frontend Developer Challenge Platform",
-  description: "AI ERA - Frontend Developer Challenge Platform, includes AI and fundamentals challenges",
+  title: "AI-Era Web Dev Skills",
+  description: "AI-Era Web Dev Skills - Frontend Developer Challenge Platform",
 };
 
 export default async function RootLayout({

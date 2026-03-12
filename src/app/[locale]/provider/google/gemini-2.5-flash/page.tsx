@@ -7,7 +7,7 @@ export default function Gemini25FlashPage() {
         </div>
         <div className="p-4">
           <label className="block text-xs mb-2 opacity-60">
-            user@api-test:~$
+            user@ai-era-web-dev-skills:~$
           </label>
           <textarea
             placeholder="Enter your prompt..."

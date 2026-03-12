@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getTranslations } from 'next-intl/server';
+import { TypewriterText } from '@/components/TypewriterText';
 
 interface Challenge {
   name: string;
@@ -119,7 +120,7 @@ export default async function Home() {
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="flex justify-between items-center h-14">
             <Link href="/" className="text-sm font-bold tracking-wider text-glow">
-              &gt; AI ERA_
+              &gt; AI-ERA_
             </Link>
             <div className="flex items-center gap-4 md:gap-6 text-xs">
               <Link href="/" className="hover:text-glow transition-all opacity-70 hover:opacity-100">
@@ -139,7 +140,14 @@ export default async function Home() {
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-16">
         <div className="text-center mb-12 md:mb-20">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-glow mb-4 md:mb-6 tracking-tight">
-            &gt; AI ERA_
+            <TypewriterText
+              texts={["AI-Era", "Web Dev Skills"]}
+              typingSpeed={120}
+              deletingSpeed={80}
+              pauseDuration={5000}
+              prefix="> "
+              suffix="_"
+            />
             <span className="animate-blink text-2xl md:text-3xl">█</span>
           </h1>
           <p className="text-sm md:text-base opacity-60 max-w-2xl mx-auto mb-6">
@@ -216,7 +224,7 @@ export default async function Home() {
         </div>
 
         <div className="mt-8 text-center text-xs opacity-40">
-          &gt; root@ai-era:~/challenges# _
+          &gt; root@ai-era-web-dev-skills:~/challenges# _
           <span className="animate-blink">█</span>
         </div>
       </div>
