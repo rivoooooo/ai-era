@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getTranslations } from 'next-intl/server';
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { TypewriterText } from '@/components/TypewriterText';
+import { ModeToggle } from "@/components/mode-toggle";
 
 interface Challenge {
   name: string;
@@ -89,10 +90,10 @@ const categories: Category[] = [
 ];
 
 const difficultyColors: Record<string, string> = {
-  EASY: "#33ff00",
-  MEDIUM: "#ffb000",
-  HARD: "#ff6600",
-  EXPERT: "#ff3333",
+  EASY: "var(--success)",
+  MEDIUM: "var(--warning)",
+  HARD: "var(--chart-3)",
+  EXPERT: "var(--error)",
 };
 
 function splitIntoColumns<T>(arr: T[], numCols = 3): Array<T[]> {
@@ -121,7 +122,7 @@ export default async function Home() {
     <main className="min-h-screen">
       <div className="scanlines" />
       
-      <nav className="border-b border-[#1f521f] bg-[#0a0a0a]">
+      <nav className="border-b border-border bg-background">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="flex justify-between items-center h-14">
             <Link href="/" className="text-sm font-bold tracking-wider text-glow">
@@ -138,6 +139,7 @@ export default async function Home() {
                 [{tNav('about')}]
               </Link>
               <LanguageSwitcher />
+              <ModeToggle />
             </div>
           </div>
         </div>
@@ -177,7 +179,7 @@ export default async function Home() {
                   <Link
                     key={challenge.name}
                     href={challenge.href}
-                    className="w-full py-2 px-3 hover:bg-[#1f521f] hover:text-[#33ff00] focus:bg-[#1f521f] focus:text-[#33ff00] transition-all duration-150 group text-left block outline-none border-l-2 border-transparent hover:border-l-[#33ff00]"
+                    className="w-full py-2 px-3 hover:bg-muted hover:text-foreground focus:bg-muted focus:text-foreground transition-all duration-150 group text-left block outline-none border-l-2 border-transparent hover:border-l-primary"
                     style={{ borderColor: "transparent" }}
                   >
                     <div className="flex justify-between items-center">
@@ -222,7 +224,7 @@ export default async function Home() {
               <span>{tSystem('status')}:</span>
               <span>[{tSystem('ready')}]</span>
             </div>
-            <div className="flex justify-between mt-2 pt-2 border-t border-[#1f521f]">
+            <div className="flex justify-between mt-2 pt-2 border-t border-border">
               <span>{tSystem('difficulty')}:</span>
               <span>[{tDifficulty('EASY')}] [{tDifficulty('MEDIUM')}] [{tDifficulty('HARD')}] [{tDifficulty('EXPERT')}]</span>
             </div>

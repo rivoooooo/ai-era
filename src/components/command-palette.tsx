@@ -60,10 +60,10 @@ const categories = [
 ]
 
 const difficultyColors: Record<string, { color: string; border: string }> = {
-  EASY: { color: "#33ff00", border: "#33ff00" },
-  MEDIUM: { color: "#ffb000", border: "#ffb000" },
-  HARD: { color: "#ff6600", border: "#ff6600" },
-  EXPERT: { color: "#ff3333", border: "#ff3333" },
+  EASY: { color: "var(--success)", border: "var(--success)" },
+  MEDIUM: { color: "var(--warning)", border: "var(--warning)" },
+  HARD: { color: "var(--chart-3)", border: "var(--chart-3)" },
+  EXPERT: { color: "var(--error)", border: "var(--error)" },
 }
 
 export function CommandPaletteWrapper() {

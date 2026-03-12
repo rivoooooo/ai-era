@@ -6,6 +6,7 @@ import { CommandPaletteWrapper } from '@/components/command-palette';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { getLocale } from 'next-intl/server';
+import { ThemeProvider } from '@/components/theme-provider';
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -33,14 +34,19 @@ export default async function RootLayout({
         className={`${jetbrains.variable} antialiased`}
         style={{ 
           fontFamily: "var(--font-jetbrains), monospace",
-          backgroundColor: "var(--background)",
-          color: "var(--foreground)"
         }}
       >
-        <NextIntlClientProvider messages={messages}>
-          {children}
-          <CommandPaletteWrapper />
-        </NextIntlClientProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange={false}
+        >
+          <NextIntlClientProvider messages={messages}>
+            {children}
+            <CommandPaletteWrapper />
+          </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

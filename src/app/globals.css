@@ -4,86 +4,172 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ============================================
+   TERMINAL CLI DESIGN SYSTEM - CSS VARIABLES
+   Dual Theme Support: Light (default) & Dark
+   ============================================ */
+
+/* Light Mode (Default) - Paper/Ink Aesthetic */
 :root {
+  /* Background Hierarchy */
+  --background: #f5f5f0;
+  --foreground: #1a3d1a;
+  --card: #ffffff;
+  --card-foreground: #1a3d1a;
+  --popover: #ffffff;
+  --popover-foreground: #1a3d1a;
+
+  /* Functional Colors */
+  --primary: #2d8a2d;
+  --primary-foreground: #ffffff;
+  --secondary: #cc8800;
+  --secondary-foreground: #0a0a0a;
+
+  /* Semantic Colors */
+  --success: #2d8a2d;
+  --warning: #cc8800;
+  --error: #cc3333;
+  --info: #0088cc;
+
+  /* Auxiliary Colors */
+  --muted: #e8e8e0;
+  --muted-foreground: #5a7a5a;
+  --accent: #2d8a2d;
+  --accent-foreground: #ffffff;
+  --destructive: #cc3333;
+  --destructive-foreground: #ffffff;
+
+  /* Border & Input */
+  --border: #c4d4c4;
+  --input: #c4d4c4;
+  --ring: #2d8a2d;
+
+  /* Radius - Terminal has no rounded corners */
+  --radius: 0px;
+
+  /* Glow Effect - Subdued for light mode */
+  --glow: 0 0 3px rgba(45, 138, 45, 0.3);
+
+  /* Chart Colors */
+  --chart-1: #2d8a2d;
+  --chart-2: #cc8800;
+  --chart-3: #e67e00;
+  --chart-4: #cc3333;
+  --chart-5: #5a7a5a;
+
+  /* Sidebar Colors */
+  --sidebar: #f5f5f0;
+  --sidebar-foreground: #1a3d1a;
+  --sidebar-primary: #2d8a2d;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e8e8e0;
+  --sidebar-accent-foreground: #1a3d1a;
+  --sidebar-border: #c4d4c4;
+  --sidebar-ring: #2d8a2d;
+}
+
+/* Dark Mode - Classic Terminal */
+.dark {
+  /* Background Hierarchy */
   --background: #0a0a0a;
   --foreground: #33ff00;
-  
+  --card: #0f0f0f;
+  --card-foreground: #33ff00;
+  --popover: #0f0f0f;
+  --popover-foreground: #33ff00;
+
+  /* Functional Colors */
   --primary: #33ff00;
   --primary-foreground: #0a0a0a;
-  
   --secondary: #ffb000;
   --secondary-foreground: #0a0a0a;
-  
-  --muted: #1f521f;
-  --muted-foreground: #33ff00;
-  
+
+  /* Semantic Colors */
+  --success: #33ff00;
+  --warning: #ffb000;
+  --error: #ff3333;
+  --info: #00ffff;
+
+  /* Auxiliary Colors */
+  --muted: #1a3d1a;
+  --muted-foreground: #66ff66;
   --accent: #33ff00;
   --accent-foreground: #0a0a0a;
-  
-  --error: #ff3333;
-  --error-foreground: #0a0a0a;
-  
+  --destructive: #ff3333;
+  --destructive-foreground: #0a0a0a;
+
+  /* Border & Input */
   --border: #1f521f;
   --input: #1f521f;
   --ring: #33ff00;
-  
-  --card: #0a0a0a;
-  --card-foreground: #33ff00;
-  --popover: #0a0a0a;
-  --popover-foreground: #33ff00;
-  
-  --destructive: #ff3333;
-  --destructive-foreground: #0a0a0a;
-  
-  --radius: 0px;
-  
+
+  /* Glow Effect - Strong for dark mode */
   --glow: 0 0 5px rgba(51, 255, 0, 0.5);
-  
+
+  /* Chart Colors */
   --chart-1: #33ff00;
   --chart-2: #ffb000;
   --chart-3: #ff6600;
   --chart-4: #ff3333;
   --chart-5: #1f521f;
-  
+
+  /* Sidebar Colors */
   --sidebar: #0a0a0a;
   --sidebar-foreground: #33ff00;
   --sidebar-primary: #33ff00;
   --sidebar-primary-foreground: #0a0a0a;
-  --sidebar-accent: #1f521f;
+  --sidebar-accent: #1a3d1a;
   --sidebar-accent-foreground: #33ff00;
   --sidebar-border: #1f521f;
   --sidebar-ring: #33ff00;
 }
 
+/* ============================================
+   TAILWIND V4 THEME MAPPING
+   ============================================ */
+
 @theme inline {
+  /* Core Colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-error: var(--error);
-  --color-error-foreground: var(--error-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
+
+  /* Functional Colors */
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  /* Semantic Colors */
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+  --color-info: var(--info);
+
+  /* Auxiliary Colors */
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
-  
+
+  /* Border & Input */
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Chart Colors */
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-  
+
+  /* Sidebar Colors */
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -92,23 +178,29 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  
+
+  /* Typography */
   --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, "JetBrains Mono", "Fira Code", monospace;
   --font-sans: var(--font-jetbrains), ui-monospace, SFMono-Regular, "JetBrains Mono", "Fira Code", monospace;
-  
+
+  /* Radius - All 0px for Terminal aesthetic */
   --radius-sm: 0px;
   --radius-md: 0px;
   --radius-lg: 0px;
   --radius-xl: 0px;
 }
 
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
 * {
   border-color: var(--border);
 }
 
 html, body {
-  background-color: var(--background) !important;
-  color: var(--foreground) !important;
+  background-color: var(--background);
+  color: var(--foreground);
 }
 
 body {
@@ -116,10 +208,16 @@ body {
   min-height: 100vh;
 }
 
+/* ============================================
+   TERMINAL UTILITY CLASSES
+   ============================================ */
+
+/* Text Glow - Phosphor persistence effect */
 .text-glow {
-  text-shadow: 0 0 5px rgba(51, 255, 0, 0.5);
+  text-shadow: var(--glow);
 }
 
+/* CRT Scanlines Overlay */
 .scanlines {
   position: fixed;
   inset: 0;
@@ -134,16 +232,22 @@ body {
   );
 }
 
+/* Terminal Button Style */
 .btn-terminal {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 0.5rem 1.5rem;
   border: 1px solid var(--primary);
   background: transparent;
   color: var(--primary);
   font-family: inherit;
   font-size: 0.875rem;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.15s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .btn-terminal:hover {
@@ -155,6 +259,12 @@ body {
   transform: translateY(1px);
 }
 
+.btn-terminal:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* Terminal Card Style */
 .card-terminal {
   background: var(--card);
   border: 1px solid var(--border);
@@ -167,9 +277,24 @@ body {
   padding: 0.5rem 1rem;
   margin: -1rem -1rem 1rem -1rem;
   font-size: 0.75rem;
+  font-weight: 600;
   letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
 }
 
+/* Glass Panel - Semi-transparent overlay */
+.glass-panel {
+  background: color-mix(in srgb, var(--card) 90%, transparent);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(4px);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+/* Cursor Blink Animation */
 @keyframes blink {
   0%, 50% { opacity: 1; }
   51%, 100% { opacity: 0; }
@@ -179,28 +304,118 @@ body {
   animation: blink 1s step-end infinite;
 }
 
+/* Typing Animation */
 @keyframes typing {
   from { width: 0; }
   to { width: 100%; }
 }
 
 .animate-typing {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
   animation: typing 2s steps(30) forwards;
 }
 
-.glass-panel {
-  background: rgba(10, 10, 10, 0.9);
-  border: 1px solid var(--border);
+/* Theme Transition */
+.theme-transition {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
+
+/* Glitch Effect on Hover */
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-1px, 1px); }
+  40% { transform: translate(-1px, -1px); }
+  60% { transform: translate(1px, 1px); }
+  80% { transform: translate(1px, -1px); }
+  100% { transform: translate(0); }
+}
+
+.hover-glitch:hover {
+  animation: glitch 0.2s ease-in-out;
+}
+
+/* ============================================
+   LAYER BASE - SHADCN/UI INTEGRATION
+   ============================================ */
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
   }
+
   html {
     @apply font-mono;
+  }
+
+  /* Selection styling */
+  ::selection {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--muted);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+  }
+
+  /* Focus visible styling */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY - REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .animate-blink,
+  .animate-typing,
+  .hover-glitch:hover {
+    animation: none;
+  }
+}
+
+/* ============================================
+   RESPONSIVE UTILITIES
+   ============================================ */
+
+@media (max-width: 640px) {
+  .btn-terminal {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+  }
+
+  .card-terminal {
+    padding: 0.75rem;
   }
 }
