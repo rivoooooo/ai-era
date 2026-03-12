@@ -121,5 +121,20 @@
     "title": "チャット",
     "placeholder": "メッセージを入力...",
     "send": "送信"
+  },
+  "commandPalette": {
+    "title": "コマンドパレット",
+    "description": "実行するコマンドを検索...",
+    "placeholder": "コマンドを入力または検索...",
+    "noResults": "結果が見つかりません。",
+    "navigation": "ナビゲーション",
+    "home": "ホーム",
+    "homeDesc": "メインページに戻る",
+    "sampleChallenge": "サンプルチャレンジ",
+    "system": "システム",
+    "systemStatus": "システムステータス",
+    "systemStatusDesc": "[OK]",
+    "clearCache": "キャッシュをクリア",
+    "clearCacheDesc": "ローカルストレージをクリア"
   }
 }

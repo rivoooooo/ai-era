@@ -2,8 +2,8 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 import {
-  Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
@@ -68,6 +68,7 @@ const difficultyColors: Record<string, { color: string; border: string }> = {
 
 export function CommandPaletteWrapper() {
   const router = useRouter()
+  const t = useTranslations("commandPalette")
 
   const groupedChallenges = React.useMemo(() => {
     const groups: Record<string, Challenge[]> = {}
@@ -81,19 +82,23 @@ export function CommandPaletteWrapper() {
   }, [])
 
   return (
-    <CommandPalette label="Command Menu">
-      <CommandInput placeholder="Type a command or search..." />
+    <CommandPalette 
+      title={t("title")} 
+      description={t("description")}
+      searchText={t("title")}
+    >
+      <CommandInput placeholder={t("placeholder")} />
       <CommandList>
-        <CommandEmpty>No results found.</CommandEmpty>
+        <CommandEmpty>{t("noResults")}</CommandEmpty>
         
-        <CommandGroup heading="NAVIGATION">
+        <CommandGroup heading={t("navigation")}>
           <CommandItem onSelect={() => router.push("/")}>
-            <span>&gt; Home</span>
-            <span className="ml-2 opacity-60">Return to main page</span>
+            <span>&gt; {t("home")}</span>
+            <span className="ml-2 opacity-60">{t("homeDesc")}</span>
           </CommandItem>
           <CommandItem onSelect={() => router.push("/challenge/event-loop")}>
             <span>&gt; Event Loop</span>
-            <span className="ml-2 opacity-60">Sample challenge</span>
+            <span className="ml-2 opacity-60">{t("sampleChallenge")}</span>
           </CommandItem>
         </CommandGroup>
         
@@ -124,14 +129,14 @@ export function CommandPaletteWrapper() {
         
         <CommandSeparator />
         
-        <CommandGroup heading="SYSTEM">
+        <CommandGroup heading={t("system")}>
           <CommandItem onSelect={() => console.log("Status: Ready")}>
-            <span>&gt; System Status</span>
-            <span className="ml-2 opacity-60">[OK]</span>
+            <span>&gt; {t("systemStatus")}</span>
+            <span className="ml-2 opacity-60">{t("systemStatusDesc")}</span>
           </CommandItem>
           <CommandItem onSelect={() => console.log("Clear cache")}>
-            <span>&gt; Clear Cache</span>
-            <span className="ml-2 opacity-60">Clear local storage</span>
+            <span>&gt; {t("clearCache")}</span>
+            <span className="ml-2 opacity-60">{t("clearCacheDesc")}</span>
           </CommandItem>
         </CommandGroup>
       </CommandList>

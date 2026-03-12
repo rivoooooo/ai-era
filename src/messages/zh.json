@@ -121,5 +121,20 @@
     "title": "对话",
     "placeholder": "输入消息...",
     "send": "发送"
+  },
+  "commandPalette": {
+    "title": "命令面板",
+    "description": "搜索要执行的命令...",
+    "placeholder": "输入命令或搜索...",
+    "noResults": "未找到结果。",
+    "navigation": "导航",
+    "home": "首页",
+    "homeDesc": "返回主页",
+    "sampleChallenge": "示例挑战",
+    "system": "系统",
+    "systemStatus": "系统状态",
+    "systemStatusDesc": "[正常]",
+    "clearCache": "清除缓存",
+    "clearCacheDesc": "清除本地存储"
   }
 }

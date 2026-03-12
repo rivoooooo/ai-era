@@ -121,5 +121,20 @@
     "title": "Chat",
     "placeholder": "Type a message...",
     "send": "Send"
+  },
+  "commandPalette": {
+    "title": "Command Palette",
+    "description": "Search for a command to run...",
+    "placeholder": "Type a command or search...",
+    "noResults": "No results found.",
+    "navigation": "NAVIGATION",
+    "home": "Home",
+    "homeDesc": "Return to main page",
+    "sampleChallenge": "Sample challenge",
+    "system": "SYSTEM",
+    "systemStatus": "System Status",
+    "systemStatusDesc": "[OK]",
+    "clearCache": "Clear Cache",
+    "clearCacheDesc": "Clear local storage"
   }
 }
