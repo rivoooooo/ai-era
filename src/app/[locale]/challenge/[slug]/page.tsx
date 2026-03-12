@@ -1,35 +1,16 @@
 'use client';
 
-import { useState, use, useEffect } from 'react';
+import { useState, use, useEffect, Suspense } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { getChallengeConfig, type ChallengeConfig } from '@/app/[locale]/challenge/[slug]/playground/utils';
 import PreviewFrame from '@/app/[locale]/challenge/[slug]/playground/components/PreviewFrame';
 
-interface Question {
-  id: number;
-  question: string;
-  options?: string[];
-  answer?: string;
-  code?: string;
-}
-
-interface Challenge {
-  slug: string;
-  title: string;
-  description: string;
-  difficulty: "EASY" | "MEDIUM" | "HARD" | "EXPERT";
-  category: string;
-  questions: Question[];
-  content?: {
-    intro: string;
-    objectives: string[];
-    hints: string[];
-  };
-}
-
-const challenges: Record<string, Challenge> = {}
-
-const playgroundChallenges: string[] = [];
+const localeToLanguage: Record<string, string> = {
+  'zh': 'zh',
+  'en': 'en',
+  'ja': 'ja',
+};
 
 const difficultyColors: Record<string, string> = {
   EASY: "var(--success)",
@@ -38,12 +19,16 @@ const difficultyColors: Record<string, string> = {
   EXPERT: "var(--error)",
 };
 
-export default function ChallengePage({ params }: { params: Promise<{ slug: string }> }) {
-  const resolvedParams = use(params);
-  const { slug } = resolvedParams;
-  const challenge = challenges[slug];
-  const isPlayground = playgroundChallenges.includes(slug);
-
+function ChallengeContent({ 
+  slug, 
+  locale 
+}: { 
+  slug: string;
+  locale: string;
+}) {
+  const searchParams = useSearchParams();
+  const lang = searchParams.get('lang') || localeToLanguage[locale] || 'en';
+  
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [previewCode, setPreviewCode] = useState({
     html: '',
@@ -51,6 +36,33 @@ export default function ChallengePage({ params }: { params: Promise<{ slug: stri
     js: ''
   });
   const [challengeConfig, setChallengeConfig] = useState<ChallengeConfig | null>(null);
+  const [challengeData, setChallengeData] = useState<{
+    name: string;
+    description: string;
+    difficulty: string;
+    category?: { name: string };
+  } | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchChallenge() {
+      try {
+        const response = await fetch(`/api/challenges/${slug}?lang=${lang}`);
+        if (!response.ok) {
+          throw new Error('Challenge not found');
+        }
+        const data = await response.json();
+        setChallengeData(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to load challenge');
+      } finally {
+        setLoading(false);
+      }
+    }
+    
+    fetchChallenge();
+  }, [slug, lang]);
 
   useEffect(() => {
     if (slug && !challengeConfig) {
@@ -63,7 +75,15 @@ export default function ChallengePage({ params }: { params: Promise<{ slug: stri
     }
   }, [slug, challengeConfig]);
 
-  if (!challenge) {
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[var(--background)] p-4 md:p-8 flex items-center justify-center">
+        <div className="text-[var(--primary)] animate-blink">Loading...</div>
+      </div>
+    );
+  }
+
+  if (error || !challengeData) {
     return (
       <div className="min-h-screen bg-[var(--background)] p-4 md:p-8">
         <div className="max-w-4xl mx-auto">
@@ -72,8 +92,8 @@ export default function ChallengePage({ params }: { params: Promise<{ slug: stri
               +-- ERROR --+
             </div>
             <div className="p-8 text-center">
-              <p className="text-lg mb-4">Challenge not found</p>
-              <Link href="/en/challenge" className="btn-terminal inline-block">
+              <p className="text-lg mb-4">{error || 'Challenge not found'}</p>
+              <Link href={`/${locale}/challenge`} className="btn-terminal inline-block">
                 [BACK TO CHALLENGES]
               </Link>
             </div>
@@ -82,6 +102,8 @@ export default function ChallengePage({ params }: { params: Promise<{ slug: stri
       </div>
     );
   }
+
+  const isPlayground = !!challengeConfig;
 
   const handleFullscreen = () => {
     setIsFullscreen(!isFullscreen);
@@ -104,33 +126,34 @@ export default function ChallengePage({ params }: { params: Promise<{ slug: stri
         <div className={`${isFullscreen ? 'w-full lg:w-1/3' : 'w-full'} flex flex-col`}>
           <div className="mb-4 md:mb-6">
             <div className="flex items-center gap-2 text-xs opacity-60 mb-2">
-              <Link href="/en/challenge" className="hover:text-[var(--primary)] transition-colors">
+              <Link href={`/${locale}/challenge`} className="hover:text-[var(--primary)] transition-colors">
                 Challenges
               </Link>
               <span>/</span>
-              <span>{challenge.slug}</span>
+              <span>{slug}</span>
+              <span className="text-[var(--muted-foreground)]">({lang})</span>
             </div>
             
             <h1 className="text-2xl md:text-3xl font-bold text-glow mb-2">
-              {challenge.title}
+              {challengeData.name}
             </h1>
-            <p className="text-sm opacity-60 mb-4">{challenge.description}</p>
+            <p className="text-sm opacity-60 mb-4">{challengeData.description}</p>
             
             <div className="flex flex-wrap gap-4 text-xs">
               <span 
                 className="px-2 py-1 font-bold"
                 style={{ 
-                  color: difficultyColors[challenge.difficulty],
-                  border: `1px solid ${difficultyColors[challenge.difficulty]}`
+                  color: difficultyColors[challengeData.difficulty],
+                  border: `1px solid ${difficultyColors[challengeData.difficulty]}`
                 }}
               >
-                {challenge.difficulty}
+                {challengeData.difficulty}
               </span>
-              <span className="opacity-60 py-1">{challenge.category}</span>
+              <span className="opacity-60 py-1">{challengeData.category?.name}</span>
             </div>
           </div>
 
-          {isPlayground && challenge.content && (
+          {isPlayground && (
             <div className="card-terminal flex-1 overflow-auto">
               <div className="card-terminal-header shrink-0">
                 +-- 挑战介绍 --+
@@ -138,86 +161,35 @@ export default function ChallengePage({ params }: { params: Promise<{ slug: stri
               <div className="p-4 space-y-4">
                 <div>
                   <h3 className="text-sm font-bold text-[var(--primary)] mb-2">概述</h3>
-                  <p className="text-sm opacity-80">{challenge.content.intro}</p>
+                  <p className="text-sm opacity-80">学习如何使用这个挑战的相关功能</p>
                 </div>
                 
                 <div>
                   <h3 className="text-sm font-bold text-[var(--primary)] mb-2">学习目标</h3>
                   <ul className="space-y-1">
-                    {challenge.content.objectives.map((obj, i) => (
-                      <li key={i} className="text-sm opacity-80 flex items-start gap-2">
-                        <span className="text-[var(--primary)]">▸</span>
-                        {obj}
-                      </li>
-                    ))}
+                    <li className="text-sm opacity-80 flex items-start gap-2">
+                      <span className="text-[var(--primary)]">▸</span>
+                      掌握相关技能
+                    </li>
                   </ul>
                 </div>
                 
                 <div>
                   <h3 className="text-sm font-bold text-[var(--primary)] mb-2">提示</h3>
                   <ul className="space-y-1">
-                    {challenge.content.hints.map((hint, i) => (
-                      <li key={i} className="text-sm opacity-60 flex items-start gap-2">
-                        <span className="text-[var(--warning)]">💡</span>
-                        <span dangerouslySetInnerHTML={{ __html: hint.replace(/</g, '&lt;').replace(/>/g, '&gt;') }} />
-                      </li>
-                    ))}
+                    <li className="text-sm opacity-60 flex items-start gap-2">
+                      <span className="text-[var(--warning)]">💡</span>
+                      参考官方文档
+                    </li>
                   </ul>
                 </div>
               </div>
             </div>
           )}
 
-          {!isPlayground && (
-            <div className="space-y-6">
-              {challenge.questions.map((q, index) => (
-                <div key={q.id} className="card-terminal">
-                  <div className="card-terminal-header">
-                    +-- QUESTION {index + 1} --+
-                  </div>
-                  <div className="p-4">
-                    <p className="text-sm mb-4 font-bold">
-                      {q.id}. {q.question}
-                    </p>
-                    
-                    {q.code && (
-                      <pre className="bg-[var(--background)] border border-[var(--border)] p-4 mb-4 text-xs md:text-sm overflow-x-auto">
-                        <code>{q.code}</code>
-                      </pre>
-                    )}
-
-                    {q.options && (
-                      <div className="space-y-2">
-                        {q.options.map((option, optIndex) => (
-                          <label 
-                            key={optIndex}
-                            className="flex items-start gap-3 p-3 border border-[var(--border)] hover:bg-[var(--muted)] hover:text-[var(--foreground)] cursor-pointer transition-all"
-                          >
-                            <input 
-                              type="radio" 
-                              name={`question-${q.id}`}
-                              className="mt-0.5 accent-[var(--primary)]"
-                            />
-                            <span className="text-sm">{option}</span>
-                          </label>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
-
-              <div className="flex justify-center">
-                <button className="btn-terminal text-lg px-8 py-3">
-                  [SUBMIT ANSWERS]
-                </button>
-              </div>
-            </div>
-          )}
-
           <div className="mt-4 md:mt-6 flex flex-wrap gap-4 justify-center lg:justify-start">
             <Link 
-              href="/en/challenge"
+              href={`/${locale}/challenge`}
               className="btn-terminal text-sm px-4 py-2"
             >
               [← 返回列表]
@@ -245,7 +217,7 @@ export default function ChallengePage({ params }: { params: Promise<{ slug: stri
                     {isFullscreen ? '[退出全屏]' : '[全屏显示]'}
                   </button>
                   <Link
-                    href={`/en/challenge/${slug}/playground`}
+                    href={`/${locale}/challenge/${slug}/playground`}
                     className="btn-terminal text-xs px-3 py-1.5"
                   >
                     [前往 Playground]
@@ -269,10 +241,25 @@ export default function ChallengePage({ params }: { params: Promise<{ slug: stri
 
       {!isFullscreen && (
         <div className="mt-4 md:mt-6 text-center text-xs opacity-40">
-          &gt; root@ai-era:~/challenge/{challenge.slug}# _
+          &gt; root@ai-era:~/challenge/{slug}# _
           <span className="animate-blink">█</span>
         </div>
       )}
     </div>
+  );
+}
+
+export default function ChallengePage({ params }: { params: Promise<{ slug: string; locale: string }> }) {
+  const resolvedParams = use(params);
+  const { slug, locale } = resolvedParams;
+
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-[var(--background)] p-4 md:p-8 flex items-center justify-center">
+        <div className="text-[var(--primary)] animate-blink">Loading...</div>
+      </div>
+    }>
+      <ChallengeContent slug={slug} locale={locale} />
+    </Suspense>
   );
 }

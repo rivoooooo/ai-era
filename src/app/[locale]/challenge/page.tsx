@@ -2,6 +2,12 @@ import Link from "next/link";
 import { getTranslations } from 'next-intl/server';
 import { getCategoriesWithChallenges } from '@/server/lib/db/queries';
 
+const localeToLanguage: Record<string, string> = {
+  'zh': 'zh',
+  'en': 'en',
+  'ja': 'ja',
+};
+
 const difficultyColors: Record<string, string> = {
   EASY: "var(--success)",
   MEDIUM: "var(--warning)",
@@ -9,14 +15,22 @@ const difficultyColors: Record<string, string> = {
   EXPERT: "var(--error)",
 };
 
-export default async function ChallengePage() {
+export default async function ChallengePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const resolvedParams = await params;
+  const locale = resolvedParams.locale;
+  const language = localeToLanguage[locale] || 'en';
+  
   const tSystem = await getTranslations('system');
   const tDifficulty = await getTranslations('difficulty');
   
   let categories: Awaited<ReturnType<typeof getCategoriesWithChallenges>> = [];
   
   try {
-    categories = await getCategoriesWithChallenges();
+    categories = await getCategoriesWithChallenges(language);
   } catch (error) {
     console.error('Failed to fetch categories from database:', error);
   }
@@ -50,7 +64,7 @@ export default async function ChallengePage() {
               {category.challenges.map((challenge) => (
                 <Link
                   key={challenge.slug}
-                  href={`/en/challenge/${challenge.slug}`}
+                  href={`/${locale}/challenge/${challenge.slug}`}
                   className="w-full py-2 px-3 hover:bg-muted hover:text-foreground focus:bg-muted focus:text-foreground transition-all duration-150 group text-left block outline-none border-l-2 border-transparent hover:border-l-primary"
                   style={{ borderColor: "transparent" }}
                 >

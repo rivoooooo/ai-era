@@ -1,6 +1,6 @@
 import { db } from '../db/index';
 import { categories, challenges } from '../db/schema';
-import { eq, asc } from 'drizzle-orm';
+import { eq, asc, and } from 'drizzle-orm';
 
 export interface CategoryWithChallenges {
   id: string;
@@ -13,10 +13,11 @@ export interface CategoryWithChallenges {
     description: string | null;
     slug: string;
     difficulty: string;
+    language: string;
   }[];
 }
 
-export async function getCategoriesWithChallenges(): Promise<CategoryWithChallenges[]> {
+export async function getCategoriesWithChallenges(language: string = 'en'): Promise<CategoryWithChallenges[]> {
   const allCategories = await db
     .select()
     .from(categories)
@@ -31,9 +32,13 @@ export async function getCategoriesWithChallenges(): Promise<CategoryWithChallen
         description: challenges.description,
         slug: challenges.slug,
         difficulty: challenges.difficulty,
+        language: challenges.language,
       })
       .from(challenges)
-      .where(eq(challenges.categoryId, category.id));
+      .where(and(
+        eq(challenges.categoryId, category.id),
+        eq(challenges.language, language)
+      ));
 
     result.push({
       id: category.id,
@@ -48,9 +53,12 @@ export async function getCategoriesWithChallenges(): Promise<CategoryWithChallen
   return result;
 }
 
-export async function getChallengeBySlug(slug: string) {
+export async function getChallengeBySlug(slug: string, language: string = 'en') {
   const challenge = await db.query.challenges.findFirst({
-    where: eq(challenges.slug, slug),
+    where: and(
+      eq(challenges.slug, slug),
+      eq(challenges.language, language)
+    ),
   });
 
   if (!challenge) return null;
@@ -63,4 +71,18 @@ export async function getChallengeBySlug(slug: string) {
     ...challenge,
     category,
   };
+}
+
+export async function getChallengesByLanguage(language: string) {
+  return db
+    .select()
+    .from(challenges)
+    .where(eq(challenges.language, language));
+}
+
+export async function getAvailableLanguages() {
+  const result = await db
+    .selectDistinct({ language: challenges.language })
+    .from(challenges);
+  return result.map(r => r.language);
 }

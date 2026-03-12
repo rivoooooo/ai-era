@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, uuid, integer } from 'drizzle-orm/pg-core';
+import { pgTable, text, timestamp, uuid, integer, uniqueIndex, index } from 'drizzle-orm/pg-core';
 
 export const categories = pgTable('categories', {
   id: uuid('id').primaryKey().defaultRandom(),
@@ -12,12 +12,17 @@ export const categories = pgTable('categories', {
 export const challenges = pgTable('challenges', {
   id: uuid('id').primaryKey().defaultRandom(),
   categoryId: uuid('category_id').notNull().references(() => categories.id, { onDelete: 'cascade' }),
-  slug: text('slug').notNull().unique(),
+  slug: text('slug').notNull(),
   name: text('name').notNull(),
   description: text('description'),
   difficulty: text('difficulty').notNull(),
+  language: text('language').notNull().default('en'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
-});
+}, (table) => ({
+  slugLanguageUnique: uniqueIndex('challenges_slug_language_unique').on(table.slug, table.language),
+  languageIdx: index('idx_challenges_language').on(table.language),
+  slugLanguageIdx: index('idx_challenges_slug_language').on(table.slug, table.language),
+}));
 
 export type Category = typeof categories.$inferSelect;
 export type NewCategory = typeof categories.$inferInsert;
