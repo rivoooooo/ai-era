@@ -21,6 +21,14 @@
   "home": {
     "subtitle": "$ ./start_challenge.sh --category=all --difficulty=expert"
   },
+  "about": {
+    "project": "项目",
+    "name": "AI-Era Web Dev Skills",
+    "version": "版本",
+    "versionNumber": "1.0.0",
+    "description": "描述",
+    "descriptionContent": "AI 时代前端开发者技能挑战平台"
+  },
   "categories": {
     "ai": {
       "name": "AI 挑战",

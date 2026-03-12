@@ -4,22 +4,20 @@ import { useState, useEffect, useRef } from "react";
 
 interface AsciiArtTypewriterProps {
   lines: string[];
-  totalDuration?: number;
+  lineDelay?: number;
   className?: string;
 }
 
 export function AsciiArtTypewriter({
   lines,
-  totalDuration = 2000,
+  lineDelay = 50,
   className = "",
 }: AsciiArtTypewriterProps) {
   const [displayedLines, setDisplayedLines] = useState<string[]>([]);
   const lineRef = useRef(0);
+  const charRef = useRef(0);
 
   useEffect(() => {
-    const totalChars = lines.reduce((acc, line) => acc + line.length, 0);
-    const charDelay = totalDuration / totalChars;
-
     const interval = setInterval(() => {
       if (lineRef.current < lines.length) {
         const currentLine = lines[lineRef.current];
@@ -30,16 +28,17 @@ export function AsciiArtTypewriter({
             newLines[lineRef.current] = currentLine + currentLine[currentDisplayed.length];
           } else {
             lineRef.current += 1;
+            charRef.current = 0;
           }
           return newLines;
         });
       } else {
         clearInterval(interval);
       }
-    }, charDelay);
+    }, lineDelay);
 
     return () => clearInterval(interval);
-  }, [lines, totalDuration]);
+  }, [lines, lineDelay]);
 
   return (
     <pre className={`font-mono text-xs md:text-sm leading-none ${className}`}>

@@ -21,6 +21,14 @@
   "home": {
     "subtitle": "$ ./start_challenge.sh --category=all --difficulty=expert"
   },
+  "about": {
+    "project": "Project",
+    "name": "AI-Era Web Dev Skills",
+    "version": "Version",
+    "versionNumber": "1.0.0",
+    "description": "Description",
+    "descriptionContent": "AI-Era Frontend Developer Skills Challenge Platform"
+  },
   "categories": {
     "ai": {
       "name": "AI CHALLENGES",
