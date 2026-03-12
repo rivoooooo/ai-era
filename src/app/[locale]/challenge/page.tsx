@@ -1,109 +1,6 @@
 import Link from "next/link";
 import { getTranslations } from 'next-intl/server';
-
-interface Challenge {
-  name: string;
-  description: string;
-  href: string;
-  difficulty: "EASY" | "MEDIUM" | "HARD" | "EXPERT";
-}
-
-interface Category {
-  name: string;
-  description: string;
-  challenges: Challenge[];
-  icon: string;
-}
-
-const categories: Category[] = [
-  {
-    name: "PLAYGROUND",
-    description: "Interactive code playgrounds",
-    icon: "[PLAYGROUND]",
-    challenges: [
-      { name: "html-basics", description: "HTML basic training", href: "/en/challenge/html-basics", difficulty: "EASY" },
-      { name: "css-flexbox", description: "Flexbox layout practice", href: "/en/challenge/css-flexbox", difficulty: "EASY" },
-      { name: "css-grid", description: "CSS Grid layout", href: "/en/challenge/css-grid", difficulty: "EASY" },
-      { name: "animation-css", description: "CSS animations", href: "/en/challenge/animation-css", difficulty: "EASY" },
-      { name: "dom-manipulation", description: "DOM operations", href: "/en/challenge/dom-manipulation", difficulty: "EASY" },
-      { name: "react-basics", description: "React counter demo", href: "/en/challenge/react-basics", difficulty: "EASY" },
-      { name: "react-todo", description: "React Todo List", href: "/en/challenge/react-todo", difficulty: "EASY" },
-      { name: "canvas-animation", description: "Canvas animation", href: "/en/challenge/canvas-animation", difficulty: "EASY" },
-      { name: "fetch-api", description: "Fetch API demo", href: "/en/challenge/fetch-api", difficulty: "EASY" },
-    ],
-  },
-  {
-    name: "AI CHALLENGES",
-    description: "Modern AI tools & prompt engineering",
-    icon: "[AI]",
-    challenges: [
-      { name: "prompt-engineering", description: "Master AI prompt writing", href: "/en/challenge/prompt-engineering", difficulty: "EASY" },
-      { name: "ai-code-review", description: "AI-powered code review", href: "/en/challenge/ai-code-review", difficulty: "MEDIUM" },
-      { name: "copilot-mastery", description: "GitHub Copilot advanced usage", href: "/en/challenge/copilot-mastery", difficulty: "MEDIUM" },
-      { name: "ai-debugging", description: "Debug with AI assistants", href: "/en/challenge/ai-debugging", difficulty: "HARD" },
-      { name: "rag-system", description: "Build RAG from scratch", href: "/en/challenge/rag-system", difficulty: "EXPERT" },
-    ],
-  },
-  {
-    name: "FRONTEND PRINCIPLES",
-    description: "Core frontend fundamentals",
-    icon: "[FUNDAMENTALS]",
-    challenges: [
-      { name: "html-basics", description: "HTML basic training playground", href: "/en/challenge/html-basics", difficulty: "EASY" },
-      { name: "event-loop", description: "JavaScript Event Loop", href: "/en/challenge/event-loop", difficulty: "MEDIUM" },
-      { name: "closure-mastery", description: "Deep dive into Closures", href: "/en/challenge/closure-mastery", difficulty: "MEDIUM" },
-      { name: "this-binding", description: "Understanding 'this' binding", href: "/en/challenge/this-binding", difficulty: "EASY" },
-      { name: "async-patterns", description: "Async/Await patterns", href: "/en/challenge/async-patterns", difficulty: "HARD" },
-      { name: "react-rendering", description: "React rendering optimization", href: "/en/challenge/react-rendering", difficulty: "EXPERT" },
-    ],
-  },
-  {
-    name: "PERFORMANCE",
-    description: "Web performance optimization",
-    icon: "[PERF]",
-    challenges: [
-      { name: "react-basics", description: "React basics playground", href: "/en/challenge/react-basics", difficulty: "EASY" },
-      { name: "canvas-demo", description: "Canvas drawing playground", href: "/en/challenge/canvas-demo", difficulty: "EASY" },
-      { name: "bundle-analysis", description: "Analyze and optimize bundles", href: "/en/challenge/bundle-analysis", difficulty: "MEDIUM" },
-      { name: "lazy-loading", description: "Code splitting strategies", href: "/en/challenge/lazy-loading", difficulty: "EASY" },
-      { name: "rendering-strategies", description: "CSR vs SSR vs SSG vs ISR", href: "/en/challenge/rendering-strategies", difficulty: "HARD" },
-      { name: "memory-leaks", description: "Detect and fix memory leaks", href: "/en/challenge/memory-leaks", difficulty: "EXPERT" },
-    ],
-  },
-  {
-    name: "NETWORK",
-    description: "HTTP & network protocols",
-    icon: "[NET]",
-    challenges: [
-      { name: "http-basics", description: "HTTP methods & status codes", href: "/en/challenge/http-basics", difficulty: "EASY" },
-      { name: "cors-deep-dive", description: "CORS preflight & policies", href: "/en/challenge/cors-deep-dive", difficulty: "MEDIUM" },
-      { name: "cache-strategies", description: "Browser caching patterns", href: "/en/challenge/cache-strategies", difficulty: "HARD" },
-      { name: "websocket", description: "Real-time communication", href: "/en/challenge/websocket", difficulty: "MEDIUM" },
-    ],
-  },
-  {
-    name: "CSS MASTERY",
-    description: "Advanced CSS techniques",
-    icon: "[CSS]",
-    challenges: [
-      { name: "grid-layout", description: "CSS Grid deep dive", href: "/en/challenge/grid-layout", difficulty: "MEDIUM" },
-      { name: "flexbox-mastery", description: "Flexbox advanced patterns", href: "/en/challenge/flexbox-mastery", difficulty: "EASY" },
-      { name: "animation", description: "High-performance animations", href: "/en/challenge/animation", difficulty: "HARD" },
-      { name: "css-architecture", description: "Scalable CSS systems", href: "/en/challenge/css-architecture", difficulty: "EXPERT" },
-    ],
-  },
-  {
-    name: "TOOLING",
-    description: "Build tools & dev workflow",
-    icon: "[TOOLS]",
-    challenges: [
-      { name: "webpack-basics", description: "Webpack configuration", href: "/en/challenge/webpack-basics", difficulty: "MEDIUM" },
-      { name: "vite-mastery", description: "Vite plugin development", href: "/en/challenge/vite-mastery", difficulty: "HARD" },
-      { name: "eslint-rules", description: "Custom ESLint rules", href: "/en/challenge/eslint-rules", difficulty: "EXPERT" },
-      { name: "ci-cd-pipeline", description: "GitHub Actions workflow", href: "/en/challenge/ci-cd-pipeline", difficulty: "MEDIUM" },
-    ],
-  },
-];
+import { getCategoriesWithChallenges } from '@/server/lib/db/queries';
 
 const difficultyColors: Record<string, string> = {
   EASY: "var(--success)",
@@ -115,6 +12,14 @@ const difficultyColors: Record<string, string> = {
 export default async function ChallengePage() {
   const tSystem = await getTranslations('system');
   const tDifficulty = await getTranslations('difficulty');
+  
+  let categories: Awaited<ReturnType<typeof getCategoriesWithChallenges>> = [];
+  
+  try {
+    categories = await getCategoriesWithChallenges();
+  } catch (error) {
+    console.error('Failed to fetch categories from database:', error);
+  }
   
   const totalChallenges = categories.reduce((acc, cat) => acc + cat.challenges.length, 0);
 
@@ -144,8 +49,8 @@ export default async function ChallengePage() {
             <div className="flex flex-col">
               {category.challenges.map((challenge) => (
                 <Link
-                  key={challenge.name}
-                  href={challenge.href}
+                  key={challenge.slug}
+                  href={`/en/challenge/${challenge.slug}`}
                   className="w-full py-2 px-3 hover:bg-muted hover:text-foreground focus:bg-muted focus:text-foreground transition-all duration-150 group text-left block outline-none border-l-2 border-transparent hover:border-l-primary"
                   style={{ borderColor: "transparent" }}
                 >
@@ -181,7 +86,7 @@ export default async function ChallengePage() {
         <div className="p-4 text-sm font-mono">
           <div className="flex justify-between mb-1">
             <span>{tSystem('categories')}:</span>
-            <span>[OK] {categories.length}</span>
+            <span>[OK] {categories.length || 0}</span>
           </div>
           <div className="flex justify-between mb-1">
             <span>{tSystem('challenges')}:</span>
