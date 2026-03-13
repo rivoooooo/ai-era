@@ -31,28 +31,28 @@
   },
   "categories": {
     "ai": {
-      "name": "",
-      "description": ""
+      "name": "AI Challenges",
+      "description": "Modern AI tools and prompt engineering"
     },
     "frontend": {
-      "name": "",
-      "description": ""
+      "name": "Frontend Basics",
+      "description": "Core frontend fundamentals"
     },
     "performance": {
-      "name": "",
-      "description": ""
+      "name": "Performance Optimization",
+      "description": "Web performance optimization"
     },
     "network": {
-      "name": "",
-      "description": ""
+      "name": "Networking",
+      "description": "HTTP and network protocols"
     },
     "css": {
-      "name": "",
-      "description": ""
+      "name": "CSS Mastery",
+      "description": "Advanced CSS techniques"
     },
     "tooling": {
-      "name": "",
-      "description": ""
+      "name": "Tooling",
+      "description": "Build tools and development workflows"
     }
   },
   "difficulty": {
@@ -136,5 +136,194 @@
     "systemStatusDesc": "[OK]",
     "clearCache": "Clear Cache",
     "clearCacheDesc": "Clear local storage"
+  },
+  "headerNav": {
+    "docs": "Docs"
+  },
+  "hero": {
+    "lines": [
+      "> AI-Era_",
+      "booting developer training system...",
+      "[✓] frontend challenge engine",
+      "[✓] ai-assisted coding",
+      "[✓] debugging arena",
+      "[✓] skill progression",
+      "system online"
+    ],
+    "seoText": "AI-Era is a gamified platform for training real web developer skills in the age of AI.",
+    "cta": {
+      "start": "Start Challenges",
+      "explore": "Explore Modules"
+    }
+  },
+  "terminal": {
+    "connected": "> AI-Era connected. type a command or click below to get started.",
+    "placeholder": "type a command or click below to get started",
+    "quickCommands": {
+      "start": "start",
+      "daily": "daily",
+      "modules": "modules",
+      "rank": "rank",
+      "sandbox": "sandbox"
+    },
+    "commands": {
+      "help": {
+        "title": "Available commands:",
+        "helpDesc": "- Show this help message",
+        "startDesc": "- Start your first challenge",
+        "dailyDesc": "- Run today's daily challenge",
+        "runDesc": "- Run current challenge (requires daily)",
+        "modulesDesc": "- Browse challenge modules",
+        "sandboxDesc": "- Open code sandbox",
+        "rankDesc": "- View leaderboard",
+        "clearDesc": "- Clear terminal"
+      },
+      "start": "Starting your journey...",
+      "daily": "Loading daily challenge...",
+      "run": "Error: No active challenge. Run 'daily' first to start a challenge.",
+      "modules": {
+        "title": "Available modules:",
+        "frontend": "- Frontend challenges",
+        "javascript": "- JavaScript practice",
+        "react": "- React patterns",
+        "typescript": "- TypeScript mastery"
+      },
+      "sandbox": "Opening sandbox environment...",
+      "rank": {
+        "title": "🏆 Leaderboard",
+        "entry": "#{rank}  {handle}   {points} pts"
+      },
+      "notFound": "Command not found: {cmd}. Type 'help' for available commands.",
+      "notFoundHint": "Type 'help' for available commands."
+    }
+  },
+  "daily": {
+    "sectionTitle": "> DAILY MISSION",
+    "broadcast": "MISSION BROADCAST",
+    "active": "ACTIVE",
+    "expires": "expires in {time}",
+    "challengeId": "challenge_id:",
+    "status": "status:",
+    "statusValue": "[ ACTIVE ]",
+    "expiresLabel": "expires:",
+    "difficulty": "difficulty",
+    "time": "time",
+    "xp": "xp",
+    "skills": "skills:",
+    "execute": "[ EXECUTE ]",
+    "difficultyLevels": {
+      "easy": "EASY",
+      "intermediate": "INTERMEDIATE",
+      "hard": "HARD"
+    }
+  },
+  "modules": {
+    "sectionTitle": "> ls -la /modules/",
+    "total": "{count} directories, {total} challenges total",
+    "items": {
+      "ui": {
+        "name": "ui_engineering",
+        "keywords": "react · layout · animation"
+      },
+      "js": {
+        "name": "javascript_core",
+        "keywords": "async · closures · ES2024"
+      },
+      "ai": {
+        "name": "ai_integration",
+        "keywords": "prompts · api · llm"
+      },
+      "debug": {
+        "name": "debugging",
+        "keywords": "traces · console · fixes"
+      },
+      "perf": {
+        "name": "performance",
+        "keywords": "rendering · bundle · profiling"
+      },
+      "system": {
+        "name": "system_design",
+        "keywords": "architecture · patterns · scale"
+      }
+    },
+    "challenges": "challenges"
+  },
+  "activity": {
+    "sectionTitle": "> tail -f /var/log/activity.log",
+    "live": "LIVE",
+    "liveStats": "LIVE STATS",
+    "topToday": "TOP TODAY",
+    "stats": {
+      "online": "online:",
+      "solving": "solving:",
+      "today": "today:",
+      "streak": "streak:"
+    },
+    "streakUnit": "days",
+    "actions": {
+      "solved": "solved challenge #{n}",
+      "started": "started challenge #{n}",
+      "reachedLevel": "reached level {l}",
+      "completedModule": "completed {m} module",
+      "earnedBadge": "earned {b} badge",
+      "submitted": "submitted pull request",
+      "fixedBug": "fixed a production bug",
+      "deployed": "deployed to staging",
+      "passed": "passed all test cases",
+      "unlocked": "unlocked new module",
+      "streak": "completed daily streak",
+      "joined": "joined the platform"
+    },
+    "rankPrefix": "#{rank}",
+    "xpGain": "+{xp} xp"
+  },
+  "systemScan": {
+    "title": "SYSTEM",
+    "subtitle": "SCAN",
+    "diagnostics": "running diagnostics...",
+    "modulesLoaded": "{count} modules loaded",
+    "scanResults": {
+      "scanning": "SCANNING:",
+      "realFrontend": {
+        "title": "REAL_FRONTEND_CHALLENGES",
+        "code": "#FC-001",
+        "description": "practice building real ui components and fixing real production bugs. no toy examples. no hand-holding.",
+        "tags": ["components", "debugging", "real-world"]
+      },
+      "aiAssisted": {
+        "title": "AI_ASSISTED_DEVELOPMENT",
+        "code": "#AI-002",
+        "description": "learn to collaborate with ai tools instead of fighting them. the future workflow, starting now.",
+        "tags": ["llm", "copilot", "prompt-eng"]
+      },
+      "debugging": {
+        "title": "DEBUGGING_SKILLS",
+        "code": "#DB-003",
+        "description": "train your ability to read and repair broken production code. ship with confidence.",
+        "tags": ["console", "traces", "error-handling"]
+      }
+    }
+  },
+  "footer": {
+    "systemStatus": "> system.status",
+    "version": "version:",
+    "versionValue": "v0.1.0",
+    "modules": "modules:",
+    "modulesValue": "6",
+    "challenges": "challenges:",
+    "challengesValue": "180",
+    "uptime": "uptime:",
+    "uptimeValue": "42 days",
+    "status": "status:",
+    "statusValue": "[OK] operational",
+    "quickCommands": "QUICK COMMANDS",
+    "typeToInteract": "> type to interact",
+    "links": {
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "github": "GitHub",
+      "twitter": "Twitter"
+    },
+    "copyright": "© {year} AI-Era. All rights reserved."
   }
 }

@@ -136,5 +136,194 @@
     "systemStatusDesc": "[正常]",
     "clearCache": "清除缓存",
     "clearCacheDesc": "清除本地存储"
+  },
+  "headerNav": {
+    "docs": "文档"
+  },
+  "hero": {
+    "lines": [
+      "> AI-Era_",
+      "正在启动开发者训练系统...",
+      "[✓] 前端挑战引擎",
+      "[✓] AI辅助编码",
+      "[✓] 调试竞技场",
+      "[✓] 技能进阶追踪",
+      "系统已上线"
+    ],
+    "seoText": "AI-Era 是一个游戏化的平台，在 AI 时代训练真实的 Web 开发者技能。",
+    "cta": {
+      "start": "开始挑战",
+      "explore": "探索模块"
+    }
+  },
+  "terminal": {
+    "connected": "> AI-Era 已连接。输入命令或点击下方按钮开始。",
+    "placeholder": "输入命令或点击下方按钮开始",
+    "quickCommands": {
+      "start": "start",
+      "daily": "daily",
+      "modules": "modules",
+      "rank": "rank",
+      "sandbox": "sandbox"
+    },
+    "commands": {
+      "help": {
+        "title": "可用命令：",
+        "helpDesc": "- 显示帮助信息",
+        "startDesc": "- 开始你的第一个挑战",
+        "dailyDesc": "- 执行今日每日挑战",
+        "runDesc": "- 运行当前挑战（需要先执行每日）",
+        "modulesDesc": "- 浏览挑战模块",
+        "sandboxDesc": "- 打开代码沙盒",
+        "rankDesc": "- 查看排行榜",
+        "clearDesc": "- 清空终端"
+      },
+      "start": "正在开始你的旅程...",
+      "daily": "正在加载每日挑战...",
+      "run": "错误：没有进行中的挑战。请先执行 'daily' 开始挑战。",
+      "modules": {
+        "title": "可用模块：",
+        "frontend": "- 前端挑战",
+        "javascript": "- JavaScript 练习",
+        "react": "- React 模式",
+        "typescript": "- TypeScript 精通"
+      },
+      "sandbox": "正在打开沙盒环境...",
+      "rank": {
+        "title": "🏆 排行榜",
+        "entry": "#{rank}  {handle}   {points} 分"
+      },
+      "notFound": "命令未找到：{cmd}。输入 'help' 查看可用命令。",
+      "notFoundHint": "输入 'help' 查看可用命令。"
+    }
+  },
+  "daily": {
+    "sectionTitle": "> 每日任务",
+    "broadcast": "任务广播",
+    "active": "进行中",
+    "expires": "剩余 {time}",
+    "challengeId": "挑战ID：",
+    "status": "状态：",
+    "statusValue": "[ 进行中 ]",
+    "expiresLabel": "到期：",
+    "difficulty": "难度",
+    "time": "时间",
+    "xp": "经验",
+    "skills": "技能：",
+    "execute": "[ 执行 ]",
+    "difficultyLevels": {
+      "easy": "简单",
+      "intermediate": "中等",
+      "hard": "困难"
+    }
+  },
+  "modules": {
+    "sectionTitle": "> ls -la /modules/",
+    "total": "{count} 个目录，共 {total} 个挑战",
+    "items": {
+      "ui": {
+        "name": "ui_engineering",
+        "keywords": "react · 布局 · 动画"
+      },
+      "js": {
+        "name": "javascript_core",
+        "keywords": "异步 · 闭包 · ES2024"
+      },
+      "ai": {
+        "name": "ai_integration",
+        "keywords": "提示词 · api · llm"
+      },
+      "debug": {
+        "name": "debugging",
+        "keywords": "追踪 · 控制台 · 修复"
+      },
+      "perf": {
+        "name": "performance",
+        "keywords": "渲染 · 打包 · 性能分析"
+      },
+      "system": {
+        "name": "system_design",
+        "keywords": "架构 · 模式 · 扩展"
+      }
+    },
+    "challenges": "挑战"
+  },
+  "activity": {
+    "sectionTitle": "> tail -f /var/log/activity.log",
+    "live": "实时",
+    "liveStats": "实时统计",
+    "topToday": "今日排行",
+    "stats": {
+      "online": "在线：",
+      "solving": "解题中：",
+      "today": "今日：",
+      "streak": "连续："
+    },
+    "streakUnit": "天",
+    "actions": {
+      "solved": "完成了挑战 #{n}",
+      "started": "开始了挑战 #{n}",
+      "reachedLevel": "达到等级 {l}",
+      "completedModule": "完成了 {m} 模块",
+      "earnedBadge": "获得了 {b} 徽章",
+      "submitted": "提交了 pull request",
+      "fixedBug": "修复了一个生产环境 bug",
+      "deployed": "部署到预发布环境",
+      "passed": "通过了所有测试用例",
+      "unlocked": "解锁了新模块",
+      "streak": "完成了每日连续任务",
+      "joined": "加入了平台"
+    },
+    "rankPrefix": "#{rank}",
+    "xpGain": "+{xp} 经验"
+  },
+  "systemScan": {
+    "title": "系统",
+    "subtitle": "扫描",
+    "diagnostics": "正在运行诊断...",
+    "modulesLoaded": "{count} 个模块已加载",
+    "scanResults": {
+      "scanning": "扫描中：",
+      "realFrontend": {
+        "title": "真实前端挑战",
+        "code": "#FC-001",
+        "description": "练习构建真实的 UI 组件并修复真实的生产环境 bug。没有toy examples，没有手把手教学。",
+        "tags": ["组件", "调试", "真实场景"]
+      },
+      "aiAssisted": {
+        "title": "AI辅助开发",
+        "code": "#AI-002",
+        "description": "学习与 AI 工具协作而不是对抗它们。未来的工作方式，从现在开始。",
+        "tags": ["llm", "copilot", "提示工程"]
+      },
+      "debugging": {
+        "title": "调试技能",
+        "code": "#DB-003",
+        "description": "训练你阅读和修复生产环境中有问题的代码的能力。自信地发布代码。",
+        "tags": ["控制台", "追踪", "错误处理"]
+      }
+    }
+  },
+  "footer": {
+    "systemStatus": "> 系统状态",
+    "version": "版本：",
+    "versionValue": "v0.1.0",
+    "modules": "模块：",
+    "modulesValue": "6",
+    "challenges": "挑战：",
+    "challengesValue": "180",
+    "uptime": "运行时间：",
+    "uptimeValue": "42 天",
+    "status": "状态：",
+    "statusValue": "[正常] 运行中",
+    "quickCommands": "快捷命令",
+    "typeToInteract": "> 输入以交互",
+    "links": {
+      "privacy": "隐私政策",
+      "terms": "服务条款",
+      "github": "GitHub",
+      "twitter": "Twitter"
+    },
+    "copyright": "© {year} AI-Era. 保留所有权利。"
   }
 }
