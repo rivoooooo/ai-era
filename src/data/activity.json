@@ -1,0 +1,14 @@
+[
+  "solved challenge #%n",
+  "started challenge #%n",
+  "reached level %l",
+  "completed %m module",
+  "earned %b badge",
+  "submitted pull request",
+  "fixed a production bug",
+  "deployed to staging",
+  "passed all test cases",
+  "unlocked new module",
+  "completed daily streak",
+  "joined the platform"
+]

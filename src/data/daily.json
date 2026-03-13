@@ -1,0 +1,8 @@
+{
+  "id": 104,
+  "title": "rebuild_chatgpt_message_ui",
+  "difficulty": "intermediate",
+  "time": 25,
+  "xp": 240,
+  "skills": ["react", "layout", "scroll"]
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "ui",
+    "name": "ui_engineering",
+    "keywords": ["react", "layout", "animation"],
+    "challengeCount": 42
+  },
+  {
+    "id": "js",
+    "name": "javascript_core",
+    "keywords": ["async", "closures", "ES2024"],
+    "challengeCount": 38
+  },
+  {
+    "id": "ai",
+    "name": "ai_integration",
+    "keywords": ["prompts", "api", "llm"],
+    "challengeCount": 24
+  },
+  {
+    "id": "debug",
+    "name": "debugging",
+    "keywords": ["traces", "console", "fixes"],
+    "challengeCount": 31
+  },
+  {
+    "id": "perf",
+    "name": "performance",
+    "keywords": ["rendering", "bundle", "profiling"],
+    "challengeCount": 22
+  },
+  {
+    "id": "system",
+    "name": "system_design",
+    "keywords": ["architecture", "patterns", "scale"],
+    "challengeCount": 23
+  }
+]
