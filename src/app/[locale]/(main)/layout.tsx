@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode } from "react";
-import { Navbar } from "@/components/navbar";
+import { Header } from "@/components/layout/Header";
 import { CommandPaletteWrapper } from "@/components/command-palette";
 
 interface MainLayoutProps {
@@ -11,8 +11,8 @@ interface MainLayoutProps {
 export default function MainLayout({ children }: MainLayoutProps) {
   return (
     <>
-      <Navbar />
-      <main className="min-h-[calc(100vh-3.5rem)]">
+      <Header />
+      <main className="min-h-[calc(100vh-60px)]">
         {children}
       </main>
       <CommandPaletteWrapper />

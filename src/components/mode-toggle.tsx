@@ -10,25 +10,28 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Monitor, Moon, Sun } from "lucide-react";
+import { ClientOnly } from "@/components/ClientOnly";
 
-export function ModeToggle() {
+function ModeToggleContent() {
   const { theme, setTheme } = useTheme();
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={
-        <Button variant="outline" size="icon" className="relative">
-          <Sun
-            data-icon="inline-start"
-            className="absolute inset-0 m-auto size-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
-          />
-          <Moon
-            data-icon="inline-start"
-            className="absolute inset-0 m-auto size-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
-          />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      } />
+      <DropdownMenuTrigger
+        render={
+          <Button variant="outline" size="icon" className="relative">
+            <Sun
+              data-icon="inline-start"
+              className="absolute inset-0 m-auto size-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
+            />
+            <Moon
+              data-icon="inline-start"
+              className="absolute inset-0 m-auto size-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
+            />
+            <span className="sr-only">Toggle theme</span>
+          </Button>
+        }
+      />
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => setTheme("light")}>
           <Sun data-icon="inline-start" className="size-4" />
@@ -44,5 +47,18 @@ export function ModeToggle() {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
+  );
+}
+
+export function ModeToggle() {
+  return (
+    <ClientOnly fallback={
+      <Button variant="outline" size="icon" className="relative">
+        <Sun className="absolute inset-0 m-auto size-4" />
+        <span className="sr-only">Toggle theme</span>
+      </Button>
+    }>
+      <ModeToggleContent />
+    </ClientOnly>
   );
 }
