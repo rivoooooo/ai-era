@@ -6,6 +6,7 @@ import { useSearchParams } from 'next/navigation';
 import { EmptyState } from '@/components/ui/empty';
 import { LoadingPage, LoadingSkeletonCard } from '@/components/ui/loading';
 import { useChallenge } from '@/lib/hooks/useChallenge';
+import { cn } from '@/lib/utils';
 
 const localeToLanguage: Record<string, string> = {
   'zh': 'zh',
@@ -57,14 +58,60 @@ function ChallengeContent({
       setSelectedType(typeParam);
       setSelectedFileIndex(0);
     }
-  }, [typeParam]);
+  }, [typeParam, selectedType]);
 
   useEffect(() => {
     if (challengeData?.resources && challengeData.resources.length > 0 && !selectedType) {
       setSelectedType(challengeData.resources[0].type);
       setSelectedFileIndex(0);
     }
-  }, [challengeData]);
+  }, [challengeData, selectedType]);
+
+  const handleFullscreen = () => {
+    setIsFullscreen(prev => !prev);
+  };
+
+  const handleTypeChange = (type: string) => {
+    setSelectedType(type);
+    setSelectedFileIndex(0);
+  };
+
+  const handleFileSelect = (index: number) => {
+    setSelectedFileIndex(index);
+  };
+
+  const renderPreview = (): string => {
+    if (!challengeData?.resources) return '';
+    
+    const currentResource = challengeData.resources.find(r => r.type === selectedType);
+    if (!currentResource?.codeSource) return '';
+    
+    const htmlFile = currentResource.codeSource.find(f => f.filename.endsWith('.html'));
+    if (htmlFile) {
+      return htmlFile.content;
+    }
+    
+    const jsxFile = currentResource.codeSource.find(f => f.filename.endsWith('.jsx') || f.filename.endsWith('.js'));
+    if (jsxFile) {
+      return `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>body { font-family: Arial, sans-serif; padding: 20px; }</style>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://esm.sh/react@19/umd/react.development.js"></script>
+  <script src="https://esm.sh/react-dom@19/umd/react-dom.development.js"></script>
+  <script type="module">
+${jsxFile.content.replace(/import .+ from .+/g, '').replace(/export default/g, '')}
+  </script>
+</body>
+</html>`;
+    }
+    
+    return currentResource.codeSource[0]?.content || '';
+  };
 
   const hasName = !!challengeData?.name;
   const hasDescription = !!challengeData?.description;
@@ -115,51 +162,11 @@ function ChallengeContent({
     );
   }
 
-  const handleFullscreen = () => {
-    setIsFullscreen(!isFullscreen);
-  };
-
-  const handleTypeChange = (type: string) => {
-    setSelectedType(type);
-    setSelectedFileIndex(0);
-  };
-
-  const handleFileSelect = (index: number) => {
-    setSelectedFileIndex(index);
-  };
-
-  const renderPreview = (): string => {
-    if (!currentResource?.codeSource) return '';
-    
-    const htmlFile = currentResource.codeSource.find(f => f.filename.endsWith('.html'));
-    if (htmlFile) {
-      return htmlFile.content;
-    }
-    
-    const jsxFile = currentResource.codeSource.find(f => f.filename.endsWith('.jsx') || f.filename.endsWith('.js'));
-    if (jsxFile) {
-      return `<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <style>body { font-family: Arial, sans-serif; padding: 20px; }</style>
-</head>
-<body>
-  <div id="root"></div>
-  <script src="https://esm.sh/react@19/umd/react.development.js"></script>
-  <script src="https://esm.sh/react-dom@19/umd/react-dom.development.js"></script>
-  <script type="module">
-${jsxFile.content.replace(/import .+ from .+/g, '').replace(/export default/g, '')}
-  </script>
-</body>
-</html>`;
-    }
-    
-    return currentResource.codeSource[0]?.content || '';
-  };
-
   return (
-    <div className={`min-h-screen bg-[var(--background)] ${isFullscreen ? 'fixed inset-0 z-50' : 'p-4 md:p-8'}`}>
+    <div className={cn(
+      'min-h-screen bg-[var(--background)]',
+      isFullscreen ? 'fixed inset-0 z-50' : 'p-4 md:p-8'
+    )}>
       {isFullscreen && (
         <div className="absolute top-4 right-4 z-50">
           <button
@@ -171,8 +178,14 @@ ${jsxFile.content.replace(/import .+ from .+/g, '').replace(/export default/g, '
         </div>
       )}
 
-      <div className={`${isFullscreen ? 'h-full' : 'max-w-7xl mx-auto'} flex flex-col lg:flex-row gap-4 md:gap-6`}>
-        <div className={`${isFullscreen ? 'w-full lg:w-1/3' : 'w-full'} flex flex-col`}>
+      <div className={cn(
+        isFullscreen ? 'h-full' : 'max-w-7xl mx-auto',
+        'flex flex-col lg:flex-row gap-4 md:gap-6'
+      )}>
+        <div className={cn(
+          'flex flex-col',
+          isFullscreen ? 'w-full lg:w-1/3' : 'w-full'
+        )}>
           <div className="mb-4 md:mb-6">
             <div className="flex items-center gap-2 text-xs opacity-60 mb-2">
               <Link href={`/${locale}/challenge`} className="hover:text-[var(--primary)] transition-colors">
@@ -234,11 +247,12 @@ ${jsxFile.content.replace(/import .+ from .+/g, '').replace(/export default/g, '
                         <button
                           key={type}
                           onClick={() => handleTypeChange(type)}
-                          className={`px-3 py-1.5 text-sm font-bold transition-all ${
+                          className={cn(
+                            'px-3 py-1.5 text-sm font-bold transition-all',
                             selectedType === type 
                               ? 'bg-[var(--primary)] text-[var(--primary-foreground)]' 
                               : 'bg-[var(--muted)] hover:bg-[var(--accent)]'
-                          }`}
+                          )}
                         >
                           {typeLabels[type]?.[lang as 'zh' | 'en'] || type}
                         </button>
@@ -284,11 +298,12 @@ ${jsxFile.content.replace(/import .+ from .+/g, '').replace(/export default/g, '
                               <button
                                 key={file.filename}
                                 onClick={() => handleFileSelect(index)}
-                                className={`px-3 py-1.5 text-xs font-bold transition-all ${
+                                className={cn(
+                                  'px-3 py-1.5 text-xs font-bold transition-all',
                                   selectedFileIndex === index 
                                     ? 'bg-[var(--primary)] text-[var(--primary-foreground)]' 
                                     : 'bg-[var(--muted)] hover:bg-[var(--accent)]'
-                                }`}
+                                )}
                               >
                                 {file.filename}
                               </button>
@@ -351,7 +366,10 @@ ${jsxFile.content.replace(/import .+ from .+/g, '').replace(/export default/g, '
         </div>
 
         {currentResource && hasFiles ? (
-          <div className={`${isFullscreen ? 'w-full lg:w-2/3' : 'w-full'} flex flex-col`}>
+          <div className={cn(
+            'flex flex-col',
+            isFullscreen ? 'w-full lg:w-2/3' : 'w-full'
+          )}>
             <div className="card-terminal flex-1 min-h-[400px] md:min-h-[500px] lg:min-h-[600px] flex flex-col">
               <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--border)] shrink-0">
                 <div className="flex items-center gap-3">
@@ -389,7 +407,10 @@ ${jsxFile.content.replace(/import .+ from .+/g, '').replace(/export default/g, '
             </div>
           </div>
         ) : (
-          <div className={`${isFullscreen ? 'w-full lg:w-2/3' : 'w-full'} flex flex-col`}>
+          <div className={cn(
+            'flex flex-col',
+            isFullscreen ? 'w-full lg:w-2/3' : 'w-full'
+          )}>
             <div className="card-terminal flex-1 min-h-[400px] md:min-h-[500px] lg:min-h-[600px] flex items-center justify-center">
               <EmptyState
                 variant="warning"

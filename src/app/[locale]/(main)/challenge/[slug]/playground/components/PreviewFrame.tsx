@@ -184,7 +184,7 @@ ${html}
 </html>`;
 }
 
-export default function PreviewFrame({ codeSource, importSource, sandboxType }: PreviewFrameProps) {
+export default function PreviewFrame({ codeSource, importSource, sandboxType = 'html' }: PreviewFrameProps) {
   const srcDoc = useMemo(() => {
     if (!codeSource || codeSource.length === 0) {
       return `<!DOCTYPE html>

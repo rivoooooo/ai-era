@@ -1,6 +1,7 @@
 'use client';
 
 import { ChallengeFile } from '../utils';
+import { cn } from '@/lib/utils';
 
 interface CodeEditorProps {
   files: ChallengeFile[];
@@ -23,11 +24,12 @@ export default function CodeEditor({ files, activeFileIndex, onFileSelect, onCha
           <button
             key={idx}
             onClick={() => onFileSelect(idx)}
-            className={`px-4 py-2 text-xs font-medium uppercase tracking-wider transition-colors whitespace-nowrap ${
+            className={cn(
+              'px-4 py-2 text-xs font-medium uppercase tracking-wider transition-colors whitespace-nowrap',
               activeFileIndex === idx
                 ? 'bg-[var(--primary)] text-[var(--primary-foreground)]'
                 : 'bg-[var(--muted)] text-[var(--muted-foreground)] hover:bg-[var(--border)]'
-            }`}
+            )}
           >
             {file.filename}
           </button>

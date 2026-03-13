@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import CodeEditor from './components/CodeEditor';
@@ -45,19 +45,20 @@ export default function PlaygroundPage() {
   }, [slug, locale]);
 
   const handleCodeChange = useCallback((content: string) => {
-    if (challenge && code[activeFileIndex]) {
-      const newCode = [...code];
+    setCode(prevCode => {
+      if (!prevCode[activeFileIndex]) return prevCode;
+      const newCode = [...prevCode];
       newCode[activeFileIndex] = {
         ...newCode[activeFileIndex],
         content
       };
-      setCode(newCode);
-    }
-  }, [challenge, code, activeFileIndex]);
+      return newCode;
+    });
+  }, [activeFileIndex]);
 
-  const hasTitle = !!challenge?.title;
-  const hasDescription = !!challenge?.description;
-  const hasInitCode = code.length > 0;
+  const hasTitle = useMemo(() => !!challenge?.title, [challenge]);
+  const hasDescription = useMemo(() => !!challenge?.description, [challenge]);
+  const hasInitCode = useMemo(() => code.length > 0, [code]);
 
   if (loading) {
     return (
