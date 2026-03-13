@@ -1,0 +1,28 @@
+# Tasks
+
+- [x] Task 1: 创建 ASCII Art 数据文件
+  - [x] 创建 src/data/ascii.ts，包含多个 ASCII Art 图案
+- [x] Task 2: 创建 useTypewriter Hook
+  - [x] 创建 src/lib/hooks/useTypewriter.ts
+  - [x] 实现字符逐个输出逻辑
+  - [x] 实现 prefers-reduced-motion 检测
+  - [x] 实现组件卸载时清理定时器
+- [x] Task 3: 实现 Hero Section 组件
+  - [x] 修改 src/app/[locale]/(main)/page.tsx
+  - [x] 实现左侧终端打字输出
+  - [x] 实现 SEO 文本
+  - [x] 实现 H1 标签（sr-only）
+  - [x] 实现 CTA 按钮
+  - [x] 实现右侧 ASCII Art 随机展示
+  - [x] 实现响应式布局（桌面端两栏，移动端单列）
+- [x] Task 4: 验证实现
+  - [x] 验证打字动效自动播放
+  - [x] 验证打字内容与需求一致
+  - [x] 验证闪烁光标显示
+  - [x] 验证 SEO 文本可见
+  - [x] 验证 H1 在 DOM 中存在
+  - [x] 验证按钮跳转正确
+  - [x] 验证 ASCII Art 使用 pre 标签
+  - [x] 验证刷新随机更换
+  - [x] 验证 prefers-reduced-motion 行为
+  - [x] 验证移动端布局
