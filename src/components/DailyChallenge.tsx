@@ -44,7 +44,7 @@ function useCountdown() {
 
 export function DailyChallenge() {
   const locale = useLocale()
-  const daily: DailyChallenge = dailyData
+  const daily: DailyChallenge = dailyData as DailyChallenge
   const timeLeft = useCountdown()
   const difficultyConfig = DIFFICULTY_CONFIG[daily.difficulty]
 

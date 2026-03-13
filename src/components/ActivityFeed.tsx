@@ -42,7 +42,7 @@ const createLogEntry = (): LogEntry => ({
 })
 
 const createInitialLogs = (): LogEntry[] => 
-  Array.from({ length: 10 }, () => createLogEntry())
+  Array.from({ length: 5 }, () => createLogEntry())
 
 export function ActivityFeed() {
   const [logs, setLogs] = useState<LogEntry[]>(createInitialLogs)
@@ -56,12 +56,12 @@ export function ActivityFeed() {
       setLogs((prevLogs) => {
         const newEntry = createLogEntry()
         const updatedLogs = [...prevLogs, newEntry]
-        if (updatedLogs.length > 50) {
-          return updatedLogs.slice(-50)
+        if (updatedLogs.length > 20) {
+          return updatedLogs.slice(-20)
         }
         return updatedLogs
       })
-    }, 2000)
+    }, 5000)
 
     const statsInterval = setInterval(() => {
       setOnline((prev) => Math.max(8, Math.min(20, prev + Math.floor(Math.random() * 3) - 1)))

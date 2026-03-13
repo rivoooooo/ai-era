@@ -14,8 +14,36 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AI-Era Web Dev Skills",
-  description: "AI-Era Web Dev Skills - Frontend Developer Challenge Platform",
+  title: {
+    default: "AI-Era | Gamified Web Developer Training Platform",
+    template: "%s | AI-Era",
+  },
+  description:
+    "AI-Era is a gamified platform for training real frontend, JavaScript, and AI coding skills. Practice real challenges, debug production bugs, and level up as a developer.",
+  keywords: [
+    "frontend challenges",
+    "javascript practice",
+    "web developer training",
+    "ai coding",
+    "debugging skills",
+    "prompt engineering",
+  ],
+  openGraph: {
+    title: "AI-Era | Developer Training Platform",
+    description: "Gamified frontend and AI skill training for developers.",
+    type: "website",
+    locale: "en_US",
+    siteName: "AI-Era",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AI-Era | Developer Training Platform",
+    description: "Gamified frontend and AI skill training for developers.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default async function RootLayout({
