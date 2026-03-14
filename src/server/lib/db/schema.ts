@@ -114,6 +114,17 @@ export const challengeResources = pgTable('challenge_resources', {
   challengeTypeUnique: uniqueIndex('challenge_resources_challenge_type_unique').on(table.challengeId, table.type),
 }));
 
+export const challengeDependencies = pgTable('challenge_dependencies', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  challengeId: uuid('challenge_id').notNull().references(() => challenges.id, { onDelete: 'cascade' }),
+  dependsOn: uuid('depends_on').notNull().references(() => challenges.id, { onDelete: 'cascade' }),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+}, (table) => ({
+  challengeIdIdx: index('idx_challenge_dependencies_challenge_id').on(table.challengeId),
+  dependsOnIdx: index('idx_challenge_dependencies_depends_on').on(table.dependsOn),
+  challengeDependsUnique: uniqueIndex('challenge_dependencies_challenge_depends_unique').on(table.challengeId, table.dependsOn),
+}));
+
 export const admins = pgTable('admins', {
   id: uuid('id').primaryKey().defaultRandom(),
   userId: uuid('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }).unique(),
@@ -145,12 +156,25 @@ export const challengesRelations = relations(challenges, ({ one, many }) => ({
     references: [sandboxes.id],
   }),
   resources: many(challengeResources),
+  dependencies: many(challengeDependencies),
 }));
 
 export const challengeResourcesRelations = relations(challengeResources, ({ one }) => ({
   challenge: one(challenges, {
     fields: [challengeResources.challengeId],
     references: [challenges.id],
+  }),
+}));
+
+export const challengeDependenciesRelations = relations(challengeDependencies, ({ one }) => ({
+  challenge: one(challenges, {
+    fields: [challengeDependencies.challengeId],
+    references: [challenges.id],
+  }),
+  dependsOnChallenge: one(challenges, {
+    fields: [challengeDependencies.dependsOn],
+    references: [challenges.id],
+    relationName: 'depends_on_challenge',
   }),
 }));
 
@@ -167,6 +191,8 @@ export type Challenge = typeof challenges.$inferSelect;
 export type NewChallenge = typeof challenges.$inferInsert;
 export type ChallengeResource = typeof challengeResources.$inferSelect;
 export type NewChallengeResource = typeof challengeResources.$inferInsert;
+export type ChallengeDependency = typeof challengeDependencies.$inferSelect;
+export type NewChallengeDependency = typeof challengeDependencies.$inferInsert;
 export type Sandbox = typeof sandboxes.$inferSelect;
 export type NewSandbox = typeof sandboxes.$inferInsert;
 export type User = typeof users.$inferSelect;

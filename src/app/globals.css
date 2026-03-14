@@ -50,6 +50,9 @@
   /* Glow Effect - Subdued for light mode */
   --glow: 0 0 3px rgba(45, 138, 45, 0.3);
 
+  /* Primary RGB for animations */
+  --primary-rgb: 45, 138, 45;
+
   /* Chart Colors */
   --chart-1: #2d8a2d;
   --chart-2: #cc8800;
@@ -105,6 +108,9 @@
 
   /* Glow Effect - Strong for dark mode */
   --glow: 0 0 5px rgba(51, 255, 0, 0.5);
+
+  /* Primary RGB for animations */
+  --primary-rgb: 51, 255, 0;
 
   /* Chart Colors */
   --chart-1: #33ff00;
@@ -591,5 +597,292 @@ body {
 
   .card-terminal {
     padding: 0.75rem;
+  }
+}
+
+/* ============================================
+   SKILL TREE CANVAS - DOT GRID BACKGROUND
+   ============================================ */
+.skill-tree-canvas {
+  background-image: radial-gradient(
+    circle,
+    var(--border) 1px,
+    transparent 1px
+  );
+  background-size: 32px 32px;
+  background-color: var(--background);
+}
+
+/* ============================================
+   SKILL TREE NODE ANIMATIONS
+   ============================================ */
+
+/* Pulse glow animation for available nodes */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0);
+  }
+  50% {
+    box-shadow: 0 0 8px 2px rgba(var(--primary-rgb), 0.4);
+  }
+}
+
+.skill-node-available {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Burst glow animation for completed nodes */
+@keyframes completed-glow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0.6);
+  }
+  50% {
+    box-shadow: 0 0 20px 4px rgba(var(--primary-rgb), 0.6);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0);
+  }
+}
+
+.skill-node-completed {
+  animation: completed-glow 600ms ease-out;
+}
+
+/* Staggered fade-in animation */
+@keyframes node-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.skill-node-enter {
+  opacity: 0;
+  animation: node-fade-in 400ms ease-out forwards;
+}
+
+/* Connection line stroke animation */
+@keyframes draw-line {
+  from {
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.skill-connection-active {
+  stroke-dasharray: 1000;
+  animation: draw-line 400ms ease-out forwards;
+}
+
+/* ============================================
+   SKILL TREE NODE STYLES
+   ============================================ */
+
+.skill-node {
+  width: 120px;
+  height: 80px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: transform 100ms ease, box-shadow 100ms ease, opacity 150ms ease;
+  font-family: var(--font-mono);
+}
+
+.skill-node:hover:not(.skill-node-locked) {
+  transform: scale(1.05);
+  z-index: 10;
+}
+
+.skill-node-completed:hover {
+  transform: scale(1.02);
+}
+
+.skill-node-locked {
+  border-style: dashed;
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.skill-node-available {
+  border: 1px solid var(--primary);
+  cursor: pointer;
+}
+
+.skill-node-completed {
+  border: 2px solid var(--primary);
+  background: color-mix(in srgb, var(--primary) 15%, var(--card));
+  color: var(--primary);
+  font-weight: 700;
+  text-shadow: 0 0 8px var(--primary);
+  box-shadow: 0 0 12px rgba(var(--primary-rgb), 0.3);
+}
+
+.skill-node-selected {
+  border: 2px solid var(--primary);
+  background: color-mix(in srgb, var(--primary) 25%, var(--card));
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
+/* Difficulty badges */
+.difficulty-badge {
+  font-size: 9px;
+  padding: 1px 4px;
+  border: 1px solid;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.difficulty-easy {
+  color: var(--success);
+  border-color: var(--success);
+}
+
+.difficulty-medium {
+  color: var(--warning);
+  border-color: var(--warning);
+}
+
+.difficulty-hard {
+  color: var(--destructive);
+  border-color: var(--destructive);
+}
+
+.difficulty-expert {
+  color: var(--error);
+  border-color: var(--error);
+}
+
+/* ============================================
+   NODE DETAIL PANEL
+   ============================================ */
+
+.node-detail-panel {
+  height: 48px;
+  overflow: hidden;
+  transition: height 200ms ease-out;
+  background: var(--card);
+  border-top: 1px solid var(--border);
+}
+
+.node-detail-panel-expanded {
+  height: auto;
+}
+
+/* ============================================
+   PROGRESS WIDGET
+   ============================================ */
+
+.progress-widget {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 12px;
+  min-width: 160px;
+  z-index: 100;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.progress-widget-collapsed {
+  height: auto;
+}
+
+.progress-bar-chars {
+  letter-spacing: -1px;
+}
+
+/* ============================================
+   FILTER TOOLBAR
+   ============================================ */
+
+.filter-toolbar {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+
+.filter-select {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  padding: 4px 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+/* ============================================
+   RESPONSIVE STYLES FOR SKILL TREE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .skill-tree-canvas {
+    height: 400px !important;
+  }
+  
+  .skill-node {
+    width: 100px;
+    height: 70px;
+  }
+  
+  .difficulty-badge {
+    font-size: 8px;
+  }
+  
+  .skill-node span {
+    font-size: 10px !important;
+  }
+  
+  .skill-node .text-\[10px\] {
+    font-size: 8px !important;
+  }
+  
+  .filter-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  
+  .filter-toolbar > div {
+    width: 100%;
+  }
+  
+  .filter-select {
+    width: 100%;
+  }
+  
+  .progress-widget {
+    top: 8px;
+    right: 8px;
+    min-width: 140px;
+    padding: 8px;
+    font-size: 10px;
+  }
+  
+  .node-detail-panel {
+    padding: 8px;
   }
 }

@@ -1,5 +1,5 @@
 import { db } from '../db/index';
-import { categories, challenges, challengeResources } from '../db/schema';
+import { categories, challenges, challengeResources, challengeDependencies } from '../db/schema';
 import { eq, asc, and, like, or, sql } from 'drizzle-orm';
 
 export interface CategoryWithChallenges {
@@ -293,4 +293,122 @@ export async function getAvailableDifficulties() {
     .selectDistinct({ difficulty: challenges.difficulty })
     .from(challenges);
   return result.map(r => r.difficulty);
+}
+
+export interface ChallengeDependencyWithDetails {
+  id: string;
+  challengeId: string;
+  dependsOn: string;
+  dependsOnChallenge?: {
+    id: string;
+    name: string;
+    slug: string;
+    difficulty: string;
+  };
+}
+
+export async function getChallengeDependencies(challengeId: string): Promise<ChallengeDependencyWithDetails[]> {
+  const dependencies = await db
+    .select()
+    .from(challengeDependencies)
+    .where(eq(challengeDependencies.challengeId, challengeId));
+
+  const dependenciesWithDetails = await Promise.all(
+    dependencies.map(async (dep) => {
+      const dependsOnChallenge = await db
+        .select({
+          id: challenges.id,
+          name: challenges.name,
+          slug: challenges.slug,
+          difficulty: challenges.difficulty,
+        })
+        .from(challenges)
+        .where(eq(challenges.id, dep.dependsOn))
+        .limit(1);
+
+      return {
+        ...dep,
+        dependsOnChallenge: dependsOnChallenge[0] || null,
+      };
+    })
+  );
+
+  return dependenciesWithDetails;
+}
+
+export async function getChallengeDependents(challengeId: string): Promise<ChallengeDependencyWithDetails[]> {
+  const dependents = await db
+    .select()
+    .from(challengeDependencies)
+    .where(eq(challengeDependencies.dependsOn, challengeId));
+
+  const dependentsWithDetails = await Promise.all(
+    dependents.map(async (dep) => {
+      const challenge = await db
+        .select({
+          id: challenges.id,
+          name: challenges.name,
+          slug: challenges.slug,
+          difficulty: challenges.difficulty,
+        })
+        .from(challenges)
+        .where(eq(challenges.id, dep.challengeId))
+        .limit(1);
+
+      return {
+        ...dep,
+        dependsOnChallenge: challenge[0] || null,
+      };
+    })
+  );
+
+  return dependentsWithDetails;
+}
+
+export interface ChallengeDependencyGraph {
+  challengeId: string;
+  challengeName: string;
+  challengeSlug: string;
+  dependsOn: string[];
+  dependents: string[];
+}
+
+export async function getAllChallengeDependencies(): Promise<ChallengeDependencyGraph[]> {
+  const allChallenges = await db
+    .select({
+      id: challenges.id,
+      name: challenges.name,
+      slug: challenges.slug,
+    })
+    .from(challenges);
+
+  const allDependencies = await db
+    .select()
+    .from(challengeDependencies);
+
+  const graphMap = new Map<string, ChallengeDependencyGraph>();
+
+  for (const challenge of allChallenges) {
+    graphMap.set(challenge.id, {
+      challengeId: challenge.id,
+      challengeName: challenge.name,
+      challengeSlug: challenge.slug,
+      dependsOn: [],
+      dependents: [],
+    });
+  }
+
+  for (const dep of allDependencies) {
+    const challengeGraph = graphMap.get(dep.challengeId);
+    const dependsOnGraph = graphMap.get(dep.dependsOn);
+
+    if (challengeGraph) {
+      challengeGraph.dependsOn.push(dep.dependsOn);
+    }
+    if (dependsOnGraph) {
+      dependsOnGraph.dependents.push(dep.challengeId);
+    }
+  }
+
+  return Array.from(graphMap.values());
 }
