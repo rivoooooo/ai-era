@@ -1129,80 +1129,95 @@ body {
 }
 
 /* ============================================
-   DARK/LIGHT MODE - Base Variables
-   Controlled by .dark class (next-themes)
+   THEME SYSTEM - Two Independent Dimensions
+   
+   1. Color Theme (data-theme-color): Controls the color palette
+      - phosphor (green), windows (blue), ember (orange), alarm (red), void (purple)
+   
+   2. Mode (.dark class): Controls light/dark appearance
+      - Light mode: warm paper background
+      - Dark mode: deep black background
    ============================================ */
 
-/* Light Mode (Default) */
+/* ============================================
+   BASE VARIABLES (Light Mode + PHOSPHOR Default)
+   ============================================ */
 :root {
-  /* Background & Text */
-  --background:           #f5f5f0;
-  --foreground:           #1a1a1a;
-  --card:                 #ffffff;
-  --card-foreground:      #1a1a1a;
-  --popover:              #ffffff;
-  --popover-foreground:   #1a1a1a;
-  
-  /* UI Elements */
-  --border:               #d4d4d4;
-  --input:                #d4d4d4;
-  --ring:                 var(--primary);
-  --muted:                #e8e8e0;
-  --muted-foreground:     #666666;
-  
-  /* Glow Effect */
-  --glow:                 0 0 3px rgba(var(--primary-rgb), 0.3);
-  
-  /* Sidebar */
-  --sidebar:              #f5f5f0;
-  --sidebar-foreground:   #1a1a1a;
-  --sidebar-accent:       #e8e8e0;
-  --sidebar-accent-foreground: #1a1a1a;
-  --sidebar-border:       #d4d4d4;
-  --sidebar-ring:         var(--primary);
-  
   /* Radius */
-  --radius:               0px;
-}
-
-/* Dark Mode */
-.dark {
-  /* Background & Text */
-  --background:           #0a0a0a;
-  --foreground:           #e0e0e0;
-  --card:                 #141414;
-  --card-foreground:      #e0e0e0;
-  --popover:              #141414;
-  --popover-foreground:   #e0e0e0;
-  
-  /* UI Elements */
-  --border:               #2a2a2a;
-  --input:                #2a2a2a;
-  --ring:                 var(--primary);
-  --muted:                #1a1a1a;
-  --muted-foreground:     #888888;
-  
-  /* Glow Effect */
-  --glow:                 0 0 5px rgba(var(--primary-rgb), 0.5);
-  
-  /* Sidebar */
-  --sidebar:              #0a0a0a;
-  --sidebar-foreground:   #e0e0e0;
-  --sidebar-accent:       #1a1a1a;
-  --sidebar-accent-foreground: #e0e0e0;
-  --sidebar-border:       #2a2a2a;
-  --sidebar-ring:         var(--primary);
+  --radius: 0px;
 }
 
 /* ============================================
-   THEME COLOR SYSTEM - 5 Color Schemes
-   Controlled by data-theme-color attribute
-   Only defines color values, not dark/light
+   PHOSPHOR THEME - Light Mode
    ============================================ */
-
-/* Theme 0: PHOSPHOR (Green) - Default */
 :root,
 :root[data-theme-color="phosphor"] {
+  /* Core Colors */
+  --primary:              #2d8a2d;
+  --primary-foreground:   #ffffff;
+  --primary-rgb:          45, 138, 45;
+  
+  --secondary:            #cc8800;
+  --secondary-foreground: #0a0a0a;
+  
+  --accent:               #2d8a2d;
+  --accent-foreground:    #ffffff;
+  
+  --destructive:          #cc3333;
+  --destructive-foreground: #ffffff;
+  
+  /* Semantic Colors */
+  --success:              #2d8a2d;
+  --warning:              #cc8800;
+  --error:                #cc3333;
+  --info:                 #0088cc;
+  
+  /* Light Mode Backgrounds & Text (PHOSPHOR) */
+  --background:           #f5f5f0;
+  --foreground:           #1a3d1a;
+  --card:                 #ffffff;
+  --card-foreground:      #1a3d1a;
+  --popover:              #ffffff;
+  --popover-foreground:   #1a3d1a;
+  
+  /* Light Mode UI Elements (PHOSPHOR) */
+  --border:               #c4d4c4;
+  --input:                #c4d4c4;
+  --ring:                 #2d8a2d;
+  --muted:                #e8e8e0;
+  --muted-foreground:     #5a7a5a;
+  
+  /* Glow Effect */
+  --glow:                 0 0 3px rgba(45, 138, 45, 0.3);
+  
+  /* Sidebar */
+  --sidebar:              #f5f5f0;
+  --sidebar-foreground:   #1a3d1a;
+  --sidebar-primary:      #2d8a2d;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent:       #e8e8e0;
+  --sidebar-accent-foreground:  #1a3d1a;
+  --sidebar-border:       #c4d4c4;
+  --sidebar-ring:         #2d8a2d;
+  
+  /* Chart Colors */
+  --chart-1:              #2d8a2d;
+  --chart-2:              #cc8800;
+  --chart-3:              #e67e00;
+  --chart-4:              #cc3333;
+  --chart-5:              #5a7a5a;
+  
+  /* Theme Info */
+  --theme-name:           "PHOSPHOR";
+  --theme-dot:            #2d8a2d;
+}
+
+/* ============================================
+   PHOSPHOR THEME - Dark Mode
+   ============================================ */
+.dark,
+:root[data-theme-color="phosphor"].dark {
+  /* Core Colors */
   --primary:              #33ff00;
   --primary-foreground:   #0a0a0a;
   --primary-rgb:          51, 255, 0;
@@ -1216,26 +1231,121 @@ body {
   --destructive:          #ff3333;
   --destructive-foreground: #0a0a0a;
   
+  /* Semantic Colors */
   --success:              #33ff00;
   --warning:              #ffb000;
   --error:                #ff3333;
   --info:                 #00ffff;
   
+  /* Dark Mode Backgrounds & Text (PHOSPHOR) */
+  --background:           #0a0a0a;
+  --foreground:           #33ff00;
+  --card:                 #0f0f0f;
+  --card-foreground:      #33ff00;
+  --popover:              #0f0f0f;
+  --popover-foreground:   #33ff00;
+  
+  /* Dark Mode UI Elements (PHOSPHOR) */
+  --border:               #1f521f;
+  --input:                #1f521f;
+  --ring:                 #33ff00;
+  --muted:                #1a3d1a;
+  --muted-foreground:     #66ff66;
+  
+  /* Glow Effect */
+  --glow:                 0 0 5px rgba(51, 255, 0, 0.5);
+  
+  /* Sidebar */
+  --sidebar:              #0a0a0a;
+  --sidebar-foreground:   #33ff00;
+  --sidebar-primary:      #33ff00;
+  --sidebar-primary-foreground: #0a0a0a;
+  --sidebar-accent:       #1a3d1a;
+  --sidebar-accent-foreground:  #33ff00;
+  --sidebar-border:       #1f521f;
+  --sidebar-ring:         #33ff00;
+  
+  /* Chart Colors */
   --chart-1:              #33ff00;
   --chart-2:              #ffb000;
   --chart-3:              #ff6600;
   --chart-4:              #ff3333;
   --chart-5:              #1f521f;
   
-  --sidebar-primary:      #33ff00;
-  --sidebar-primary-foreground: #0a0a0a;
-  
+  /* Theme Info */
   --theme-name:           "PHOSPHOR";
   --theme-dot:            #33ff00;
 }
 
-/* Theme 1: WINDOWS (Blue) */
+/* ============================================
+   WINDOWS THEME (Blue)
+   ============================================ */
+
+/* WINDOWS - Light Mode */
 :root[data-theme-color="windows"] {
+  /* Core Colors */
+  --primary:              #0066cc;
+  --primary-foreground:   #ffffff;
+  --primary-rgb:          0, 102, 204;
+  
+  --secondary:            #cc8800;
+  --secondary-foreground: #ffffff;
+  
+  --accent:               #0066cc;
+  --accent-foreground:    #ffffff;
+  
+  --destructive:          #cc3333;
+  --destructive-foreground: #ffffff;
+  
+  /* Semantic Colors */
+  --success:              #2d8a2d;
+  --warning:              #cc8800;
+  --error:                #cc3333;
+  --info:                 #0066cc;
+  
+  /* Light Mode Backgrounds & Text (WINDOWS) */
+  --background:           #f0f4ff;
+  --foreground:           #003380;
+  --card:                 #ffffff;
+  --card-foreground:      #003380;
+  --popover:              #ffffff;
+  --popover-foreground:   #003380;
+  
+  /* Light Mode UI Elements (WINDOWS) */
+  --border:               #99bbdd;
+  --input:                #99bbdd;
+  --ring:                 #0066cc;
+  --muted:                #dde8f5;
+  --muted-foreground:     #4466aa;
+  
+  /* Glow Effect */
+  --glow:                 0 0 3px rgba(0, 102, 204, 0.3);
+  
+  /* Sidebar */
+  --sidebar:              #f0f4ff;
+  --sidebar-foreground:   #003380;
+  --sidebar-primary:      #0066cc;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent:       #dde8f5;
+  --sidebar-accent-foreground:  #003380;
+  --sidebar-border:       #99bbdd;
+  --sidebar-ring:         #0066cc;
+  
+  /* Chart Colors */
+  --chart-1:              #0066cc;
+  --chart-2:              #cc8800;
+  --chart-3:              #e67e00;
+  --chart-4:              #cc3333;
+  --chart-5:              #4466aa;
+  
+  /* Theme Info */
+  --theme-name:           "WINDOWS";
+  --theme-dot:            #0066cc;
+}
+
+/* WINDOWS - Dark Mode */
+:root[data-theme-color="windows"].dark {
+  /* Core Colors */
   --primary:              #00aaff;
   --primary-foreground:   #000814;
   --primary-rgb:          0, 170, 255;
@@ -1249,26 +1359,121 @@ body {
   --destructive:          #ff4444;
   --destructive-foreground: #000814;
   
+  /* Semantic Colors */
   --success:              #00ff88;
   --warning:              #ffcc00;
   --error:                #ff4444;
   --info:                 #00aaff;
   
+  /* Dark Mode Backgrounds & Text (WINDOWS) */
+  --background:           #000814;
+  --foreground:           #00aaff;
+  --card:                 #001428;
+  --card-foreground:      #00aaff;
+  --popover:              #001428;
+  --popover-foreground:   #00aaff;
+  
+  /* Dark Mode UI Elements (WINDOWS) */
+  --border:               #003366;
+  --input:                #003366;
+  --ring:                 #00aaff;
+  --muted:                #001f3f;
+  --muted-foreground:     #4dc3ff;
+  
+  /* Glow Effect */
+  --glow:                 0 0 6px rgba(0, 170, 255, 0.5);
+  
+  /* Sidebar */
+  --sidebar:              #000814;
+  --sidebar-foreground:   #00aaff;
+  --sidebar-primary:      #00aaff;
+  --sidebar-primary-foreground: #000814;
+  --sidebar-accent:       #001f3f;
+  --sidebar-accent-foreground:  #00aaff;
+  --sidebar-border:       #003366;
+  --sidebar-ring:         #00aaff;
+  
+  /* Chart Colors */
   --chart-1:              #00aaff;
   --chart-2:              #ffcc00;
   --chart-3:              #ff8800;
   --chart-4:              #ff4444;
   --chart-5:              #003366;
   
-  --sidebar-primary:      #00aaff;
-  --sidebar-primary-foreground: #000814;
-  
+  /* Theme Info */
   --theme-name:           "WINDOWS";
   --theme-dot:            #00aaff;
 }
 
-/* Theme 2: EMBER (Orange) */
+/* ============================================
+   EMBER THEME (Orange)
+   ============================================ */
+
+/* EMBER - Light Mode */
 :root[data-theme-color="ember"] {
+  /* Core Colors */
+  --primary:              #cc5500;
+  --primary-foreground:   #ffffff;
+  --primary-rgb:          204, 85, 0;
+  
+  --secondary:            #886600;
+  --secondary-foreground: #ffffff;
+  
+  --accent:               #cc5500;
+  --accent-foreground:    #ffffff;
+  
+  --destructive:          #cc3333;
+  --destructive-foreground: #ffffff;
+  
+  /* Semantic Colors */
+  --success:              #2d8a2d;
+  --warning:              #cc8800;
+  --error:                #cc3333;
+  --info:                 #cc5500;
+  
+  /* Light Mode Backgrounds & Text (EMBER) */
+  --background:           #fdf6ee;
+  --foreground:           #4d2200;
+  --card:                 #ffffff;
+  --card-foreground:      #4d2200;
+  --popover:              #ffffff;
+  --popover-foreground:   #4d2200;
+  
+  /* Light Mode UI Elements (EMBER) */
+  --border:               #e8c9a0;
+  --input:                #e8c9a0;
+  --ring:                 #cc5500;
+  --muted:                #f5e8d5;
+  --muted-foreground:     #885522;
+  
+  /* Glow Effect */
+  --glow:                 0 0 3px rgba(204, 85, 0, 0.3);
+  
+  /* Sidebar */
+  --sidebar:              #fdf6ee;
+  --sidebar-foreground:   #4d2200;
+  --sidebar-primary:      #cc5500;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent:       #f5e8d5;
+  --sidebar-accent-foreground:  #4d2200;
+  --sidebar-border:       #e8c9a0;
+  --sidebar-ring:         #cc5500;
+  
+  /* Chart Colors */
+  --chart-1:              #cc5500;
+  --chart-2:              #886600;
+  --chart-3:              #aa7700;
+  --chart-4:              #cc3333;
+  --chart-5:              #885522;
+  
+  /* Theme Info */
+  --theme-name:           "EMBER";
+  --theme-dot:            #cc5500;
+}
+
+/* EMBER - Dark Mode */
+:root[data-theme-color="ember"].dark {
+  /* Core Colors */
   --primary:              #ff8800;
   --primary-foreground:   #0d0800;
   --primary-rgb:          255, 136, 0;
@@ -1282,26 +1487,121 @@ body {
   --destructive:          #ff3333;
   --destructive-foreground: #0d0800;
   
+  /* Semantic Colors */
   --success:              #88cc00;
   --warning:              #ffcc44;
   --error:                #ff3333;
   --info:                 #ff8800;
   
+  /* Dark Mode Backgrounds & Text (EMBER) */
+  --background:           #0d0800;
+  --foreground:           #ff8800;
+  --card:                 #1a0f00;
+  --card-foreground:      #ff8800;
+  --popover:              #1a0f00;
+  --popover-foreground:   #ff8800;
+  
+  /* Dark Mode UI Elements (EMBER) */
+  --border:               #4d2800;
+  --input:                #4d2800;
+  --ring:                 #ff8800;
+  --muted:                #2b1800;
+  --muted-foreground:     #ffaa44;
+  
+  /* Glow Effect */
+  --glow:                 0 0 6px rgba(255, 136, 0, 0.5);
+  
+  /* Sidebar */
+  --sidebar:              #0d0800;
+  --sidebar-foreground:   #ff8800;
+  --sidebar-primary:      #ff8800;
+  --sidebar-primary-foreground: #0d0800;
+  --sidebar-accent:       #2b1800;
+  --sidebar-accent-foreground:  #ff8800;
+  --sidebar-border:       #4d2800;
+  --sidebar-ring:         #ff8800;
+  
+  /* Chart Colors */
   --chart-1:              #ff8800;
   --chart-2:              #ffcc44;
   --chart-3:              #ffaa00;
   --chart-4:              #ff3333;
   --chart-5:              #4d2800;
   
-  --sidebar-primary:      #ff8800;
-  --sidebar-primary-foreground: #0d0800;
-  
+  /* Theme Info */
   --theme-name:           "EMBER";
   --theme-dot:            #ff8800;
 }
 
-/* Theme 3: ALARM (Red) */
+/* ============================================
+   ALARM THEME (Red)
+   ============================================ */
+
+/* ALARM - Light Mode */
 :root[data-theme-color="alarm"] {
+  /* Core Colors */
+  --primary:              #cc0022;
+  --primary-foreground:   #ffffff;
+  --primary-rgb:          204, 0, 34;
+  
+  --secondary:            #cc5500;
+  --secondary-foreground: #ffffff;
+  
+  --accent:               #cc0022;
+  --accent-foreground:    #ffffff;
+  
+  --destructive:          #cc0000;
+  --destructive-foreground: #ffffff;
+  
+  /* Semantic Colors */
+  --success:              #2d8a2d;
+  --warning:              #cc8800;
+  --error:                #cc0000;
+  --info:                 #cc0022;
+  
+  /* Light Mode Backgrounds & Text (ALARM) */
+  --background:           #fff5f7;
+  --foreground:           #4d0011;
+  --card:                 #ffffff;
+  --card-foreground:      #4d0011;
+  --popover:              #ffffff;
+  --popover-foreground:   #4d0011;
+  
+  /* Light Mode UI Elements (ALARM) */
+  --border:               #f5b8c4;
+  --input:                #f5b8c4;
+  --ring:                 #cc0022;
+  --muted:                #fde8ec;
+  --muted-foreground:     #993344;
+  
+  /* Glow Effect */
+  --glow:                 0 0 3px rgba(204, 0, 34, 0.3);
+  
+  /* Sidebar */
+  --sidebar:              #fff5f7;
+  --sidebar-foreground:   #4d0011;
+  --sidebar-primary:      #cc0022;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent:       #fde8ec;
+  --sidebar-accent-foreground:  #4d0011;
+  --sidebar-border:       #f5b8c4;
+  --sidebar-ring:         #cc0022;
+  
+  /* Chart Colors */
+  --chart-1:              #cc0022;
+  --chart-2:              #cc5500;
+  --chart-3:              #e65000;
+  --chart-4:              #cc0000;
+  --chart-5:              #993344;
+  
+  /* Theme Info */
+  --theme-name:           "ALARM";
+  --theme-dot:            #cc0022;
+}
+
+/* ALARM - Dark Mode */
+:root[data-theme-color="alarm"].dark {
+  /* Core Colors */
   --primary:              #ff2244;
   --primary-foreground:   #0d0005;
   --primary-rgb:          255, 34, 68;
@@ -1315,26 +1615,121 @@ body {
   --destructive:          #ff0000;
   --destructive-foreground: #0d0005;
   
+  /* Semantic Colors */
   --success:              #00ff88;
   --warning:              #ff8800;
   --error:                #ff0000;
   --info:                 #ff2244;
   
+  /* Dark Mode Backgrounds & Text (ALARM) */
+  --background:           #0d0005;
+  --foreground:           #ff2244;
+  --card:                 #1a0008;
+  --card-foreground:      #ff2244;
+  --popover:              #1a0008;
+  --popover-foreground:   #ff2244;
+  
+  /* Dark Mode UI Elements (ALARM) */
+  --border:               #4d0015;
+  --input:                #4d0015;
+  --ring:                 #ff2244;
+  --muted:                #2b000c;
+  --muted-foreground:     #ff6688;
+  
+  /* Glow Effect */
+  --glow:                 0 0 6px rgba(255, 34, 68, 0.5);
+  
+  /* Sidebar */
+  --sidebar:              #0d0005;
+  --sidebar-foreground:   #ff2244;
+  --sidebar-primary:      #ff2244;
+  --sidebar-primary-foreground: #0d0005;
+  --sidebar-accent:       #2b000c;
+  --sidebar-accent-foreground:  #ff2244;
+  --sidebar-border:       #4d0015;
+  --sidebar-ring:         #ff2244;
+  
+  /* Chart Colors */
   --chart-1:              #ff2244;
   --chart-2:              #ff8800;
   --chart-3:              #ff5500;
   --chart-4:              #ff0000;
   --chart-5:              #4d0015;
   
-  --sidebar-primary:      #ff2244;
-  --sidebar-primary-foreground: #0d0005;
-  
+  /* Theme Info */
   --theme-name:           "ALARM";
   --theme-dot:            #ff2244;
 }
 
-/* Theme 4: VOID (Purple) */
+/* ============================================
+   VOID THEME (Purple)
+   ============================================ */
+
+/* VOID - Light Mode */
 :root[data-theme-color="void"] {
+  /* Core Colors */
+  --primary:              #8800cc;
+  --primary-foreground:   #ffffff;
+  --primary-rgb:          136, 0, 204;
+  
+  --secondary:            #cc0077;
+  --secondary-foreground: #ffffff;
+  
+  --accent:               #8800cc;
+  --accent-foreground:    #ffffff;
+  
+  --destructive:          #cc0033;
+  --destructive-foreground: #ffffff;
+  
+  /* Semantic Colors */
+  --success:              #2d8a2d;
+  --warning:              #cc8800;
+  --error:                #cc0033;
+  --info:                 #8800cc;
+  
+  /* Light Mode Backgrounds & Text (VOID) */
+  --background:           #faf5ff;
+  --foreground:           #2d0044;
+  --card:                 #ffffff;
+  --card-foreground:      #2d0044;
+  --popover:              #ffffff;
+  --popover-foreground:   #2d0044;
+  
+  /* Light Mode UI Elements (VOID) */
+  --border:               #ddb8f5;
+  --input:                #ddb8f5;
+  --ring:                 #8800cc;
+  --muted:                #f0e0ff;
+  --muted-foreground:     #7733aa;
+  
+  /* Glow Effect */
+  --glow:                 0 0 3px rgba(136, 0, 204, 0.3);
+  
+  /* Sidebar */
+  --sidebar:              #faf5ff;
+  --sidebar-foreground:   #2d0044;
+  --sidebar-primary:      #8800cc;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent:       #f0e0ff;
+  --sidebar-accent-foreground:  #2d0044;
+  --sidebar-border:       #ddb8f5;
+  --sidebar-ring:         #8800cc;
+  
+  /* Chart Colors */
+  --chart-1:              #8800cc;
+  --chart-2:              #cc0077;
+  --chart-3:              #e040a0;
+  --chart-4:              #cc0033;
+  --chart-5:              #7733aa;
+  
+  /* Theme Info */
+  --theme-name:           "VOID";
+  --theme-dot:            #8800cc;
+}
+
+/* VOID - Dark Mode */
+:root[data-theme-color="void"].dark {
+  /* Core Colors */
   --primary:              #cc44ff;
   --primary-foreground:   #08000d;
   --primary-rgb:          204, 68, 255;
@@ -1348,20 +1743,48 @@ body {
   --destructive:          #ff3366;
   --destructive-foreground: #08000d;
   
+  /* Semantic Colors */
   --success:              #44ffaa;
   --warning:              #ffaa00;
   --error:                #ff3366;
   --info:                 #cc44ff;
   
+  /* Dark Mode Backgrounds & Text (VOID) */
+  --background:           #08000d;
+  --foreground:           #cc44ff;
+  --card:                 #10001a;
+  --card-foreground:      #cc44ff;
+  --popover:              #10001a;
+  --popover-foreground:   #cc44ff;
+  
+  /* Dark Mode UI Elements (VOID) */
+  --border:               #3d0066;
+  --input:                #3d0066;
+  --ring:                 #cc44ff;
+  --muted:                #1f0033;
+  --muted-foreground:     #dd88ff;
+  
+  /* Glow Effect */
+  --glow:                 0 0 8px rgba(204, 68, 255, 0.5);
+  
+  /* Sidebar */
+  --sidebar:              #08000d;
+  --sidebar-foreground:   #cc44ff;
+  --sidebar-primary:      #cc44ff;
+  --sidebar-primary-foreground: #08000d;
+  --sidebar-accent:       #1f0033;
+  --sidebar-accent-foreground:  #cc44ff;
+  --sidebar-border:       #3d0066;
+  --sidebar-ring:         #cc44ff;
+  
+  /* Chart Colors */
   --chart-1:              #cc44ff;
   --chart-2:              #ff44aa;
   --chart-3:              #ff88cc;
   --chart-4:              #ff3366;
   --chart-5:              #3d0066;
   
-  --sidebar-primary:      #cc44ff;
-  --sidebar-primary-foreground: #08000d;
-  
+  /* Theme Info */
   --theme-name:           "VOID";
   --theme-dot:            #cc44ff;
 }
