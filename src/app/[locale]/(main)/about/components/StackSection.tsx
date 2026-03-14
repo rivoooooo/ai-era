@@ -6,7 +6,6 @@ import { JsonHighlight } from "./JsonHighlight"
 import { useInView } from "@/lib/hooks/useInView"
 
 interface StackSectionProps {
-  title: string
   packageJson: string
 }
 
@@ -14,7 +13,7 @@ export function StackSection({ packageJson }: StackSectionProps) {
   const [ref, isInView] = useInView<HTMLElement>({ threshold: 0.15 })
 
   return (
-    <section ref={ref} className="py-16">
+    <section ref={ref} className="py-6 md:py-8">
       <FadeInSection>
         <div className="text-sm text-primary mb-8 font-mono font-bold">
           {isInView ? (

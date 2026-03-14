@@ -5,7 +5,6 @@ import { MissionSection } from "./components/MissionSection"
 import { FounderSection } from "./components/FounderSection"
 import { TeamSection } from "./components/TeamSection"
 import { OpenRolesSection } from "./components/OpenRolesSection"
-import { StackSection } from "./components/StackSection"
 import { ContactSection } from "./components/ContactSection"
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -16,38 +15,18 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
+function SectionDivider({ section, total }: { section: number; total: number }) {
+  return (
+    <div className="overflow-hidden select-none text-border/40 text-xs tracking-widest py-1">
+      <span className="whitespace-nowrap">
+        {'─'.repeat(80)} // section {section} of {total} {'─'.repeat(80)}
+      </span>
+    </div>
+  )
+}
+
 export default async function AboutPage() {
   const t = await getTranslations("about")
-
-  const packageJson = `{
-  "name": "ai-era",
-  "version": "0.1.0",
-  "description": "A training ground for developers in the AI era",
-
-  "dependencies": {
-    "next":           "15.x",    // The framework
-    "react":          "19.x",    // The UI layer
-    "typescript":     "5.x",     // Because we're not animals
-    "drizzle-orm":    "latest",  // Type-safe queries
-    "better-auth":    "latest",  // Auth without the pain
-    "tailwindcss":    "4.x",     // Utility-first CSS
-    "@xyflow/react":  "latest",  // The skill map
-    "@google/genai":  "latest"   // The AI part of AI-Era
-  },
-
-  "devDependencies": {
-    "bun":            "latest",  // Fast. Very fast.
-    "postgresql":     "15.x",    // The database
-    "docker":         "*"        // Ships anywhere
-  },
-
-  "scripts": {
-    "dev":     "bun run dev",
-    "build":   "bun run build",
-    "learn":   "open https://ai-era.dev/challenges",
-    "improve": "open https://github.com/your-org/ai-era/issues"
-  }
-}`
 
   const teamMembers = [
     {
@@ -59,8 +38,8 @@ export default async function AboutPage() {
   ]
 
   return (
-    <div className="min-h-screen p-4 md:p-8">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen py-4 md:py-6 px-4 md:px-8">
+      <div className="max-w-5xl mx-auto">
         <h1 className="sr-only">{t("pageTitle")}</h1>
 
         <HeroSection
@@ -71,6 +50,8 @@ export default async function AboutPage() {
             t("hero.subtitle.line3"),
           ]}
         />
+
+        <SectionDivider section={2} total={6} />
 
         <MissionSection
           label={t("mission.label")}
@@ -86,6 +67,8 @@ export default async function AboutPage() {
           ]}
         />
 
+        <SectionDivider section={3} total={6} />
+
         <FounderSection
           name={t("founder.name")}
           role={t("founder.role")}
@@ -93,11 +76,15 @@ export default async function AboutPage() {
           comment={[t("founder.comment.line1"), t("founder.comment.line2")]}
         />
 
+        <SectionDivider section={4} total={6} />
+
         <TeamSection
           title={t("team.title")}
           subtitle={[t("team.subtitle.line1"), t("team.subtitle.line2")]}
           members={teamMembers}
         />
+
+        <SectionDivider section={5} total={6} />
 
         <OpenRolesSection
           title={t("openRoles.title")}
@@ -117,7 +104,7 @@ export default async function AboutPage() {
           ctaLink="https://github.com/your-org/ai-era/issues"
         />
 
-        <StackSection title={t("stack.title")} packageJson={packageJson} />
+        <SectionDivider section={6} total={6} />
 
         <ContactSection
           title={t("contact.title")}

@@ -5,13 +5,13 @@ import { TypewriterText } from "./TypewriterText"
 import { MemberCard } from "./MemberCard"
 import { useInView } from "@/lib/hooks/useInView"
 import { useReducedMotion } from "@/lib/hooks/useReducedMotion"
+import { CharacterDivider } from "./CharacterDivider"
 
 interface TeamMember {
   name: string
   role: string
   handle: string
   comment?: string[]
-  avatarUrl?: string
 }
 
 interface TeamSectionProps {
@@ -25,7 +25,7 @@ export function TeamSection({ subtitle, members }: TeamSectionProps) {
   const prefersReducedMotion = useReducedMotion()
 
   return (
-    <section ref={ref} className="py-16">
+    <section ref={ref} className="py-6 md:py-8">
       <FadeInSection>
         <div className="text-sm text-primary mb-2 font-mono font-bold">
           {isInView ? (
@@ -35,11 +35,13 @@ export function TeamSection({ subtitle, members }: TeamSectionProps) {
           )}
         </div>
 
+        <CharacterDivider className="mb-4" />
+
         <div className="space-y-1 mb-8">
           {subtitle.map((line, index) => (
             <div
               key={index}
-              className="text-[11px] text-muted-foreground italic font-mono"
+              className="text-xs text-muted-foreground italic font-mono"
             >
               {"// "}{line}
             </div>
@@ -53,7 +55,7 @@ export function TeamSection({ subtitle, members }: TeamSectionProps) {
             transform:
               isInView || prefersReducedMotion
                 ? "translateY(0)"
-                : "translateY(12px)",
+                : "translateY(20px)",
             transition: "opacity 400ms ease-out, transform 400ms ease-out",
           }}
         >
@@ -64,8 +66,8 @@ export function TeamSection({ subtitle, members }: TeamSectionProps) {
                 opacity: isInView || prefersReducedMotion ? 1 : 0,
                 transform:
                   isInView || prefersReducedMotion
-                    ? "translateY(0)"
-                    : "translateY(12px)",
+                    ? "scale(1)"
+                    : "scale(0.95)",
                 transition: `opacity 400ms ease-out ${index * 40}ms, transform 400ms ease-out ${index * 40}ms`,
               }}
             >
