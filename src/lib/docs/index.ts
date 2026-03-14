@@ -57,7 +57,7 @@ function getDocMetadata(filePath: string, locale: Locale): DocMeta | null {
 
     const fileContent = fs.readFileSync(filePath, 'utf-8')
 
-    const exportMatch = fileContent.match(/export\s+const\s+metadata\s*=\s*\{([^}]+)\}/s)
+    const exportMatch = fileContent.match(/export\s+const\s+metadata\s*=\s*\{([\s\S]+?)\}/)
     if (!exportMatch) {
       return {
         slug: parsed.slug,
