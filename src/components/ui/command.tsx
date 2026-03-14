@@ -62,9 +62,9 @@ function CommandPalette({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogHeader className="sr-only">
-        <DialogTitle>{title}</DialogTitle>
-        <DialogDescription>{description}</DialogDescription>
+      <DialogHeader className="sr-only" suppressHydrationWarning>
+        <DialogTitle suppressHydrationWarning>{title}</DialogTitle>
+        <DialogDescription suppressHydrationWarning>{description}</DialogDescription>
       </DialogHeader>
       <DialogContent
         className={cn(
