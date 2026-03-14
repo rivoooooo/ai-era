@@ -51,6 +51,16 @@
       "sourceType": "github",
       "computedHash": "a94b83ddcd2ff1c30722577f693b1bfe32f2e1a83abdd6c08c2d6cc6753b53c8"
     },
+    "next-intl-app-router": {
+      "source": "liuchiawei/agent-skills",
+      "sourceType": "github",
+      "computedHash": "77c01d0a058c9560a949ed039d5c400ab1767d327322049ec8f9c956ca778078"
+    },
+    "next-intl-i18n": {
+      "source": "canatufkansu/claude-skills",
+      "sourceType": "github",
+      "computedHash": "ea29bca30753bb928e0641bb307d99e1594d3b33291319c1cc448237b1cdc5c5"
+    },
     "nextjs-app-router-patterns": {
       "source": "wshobson/agents",
       "sourceType": "github",

@@ -431,5 +431,17 @@
         "emailInvalid": "invalid email address"
       }
     }
+  },
+  "theme": {
+    "toggle": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "language": {
+    "switch": "Switch language",
+    "zh": "中文",
+    "en": "English",
+    "ja": "日本語"
   }
 }

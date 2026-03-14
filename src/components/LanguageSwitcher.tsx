@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,10 +11,10 @@ import {
 import { Button } from '@/components/ui/button';
 import { Globe } from 'lucide-react';
 import { ClientOnly } from './ClientOnly';
-import { languageSwitcherTranslations } from '@/i18n/languageSwitcher';
 
 export function LanguageSwitcher() {
   const pathname = usePathname();
+  const t = useTranslations('language');
   
   const handleLanguageChange = (newLocale: string) => {
     const pathWithoutLocale = pathname.replace(/^\/(zh|en|ja)/, '');
@@ -21,18 +22,18 @@ export function LanguageSwitcher() {
   };
 
   const languages = [
-    { code: 'zh', name: languageSwitcherTranslations.zh.switchTo.zh },
-    { code: 'en', name: languageSwitcherTranslations.zh.switchTo.en },
-    { code: 'ja', name: languageSwitcherTranslations.zh.switchTo.ja }
+    { code: 'zh', name: t('zh') },
+    { code: 'en', name: t('en') },
+    { code: 'ja', name: t('ja') }
   ];
 
   return (
-    <ClientOnly fallback={<Button variant="ghost" size="icon" className="relative"><Globe className="absolute inset-0 m-auto size-4" /><span className="sr-only">Language</span></Button>}>
+    <ClientOnly fallback={<Button variant="ghost" size="icon" className="relative"><Globe className="absolute inset-0 m-auto size-4" /><span className="sr-only">{t('switch')}</span></Button>}>
       <DropdownMenu>
         <DropdownMenuTrigger render={
           <Button variant="ghost" size="icon" className="relative">
             <Globe className="absolute inset-0 m-auto size-4" />
-            <span className="sr-only">Language</span>
+            <span className="sr-only">{t('switch')}</span>
           </Button>
         } />
         <DropdownMenuContent align="end">

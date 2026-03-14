@@ -416,8 +416,8 @@
     "myChallenges": "我的挑战",
     "settings": "设置",
     "modal": {
-      "loginTitle": "LOGIN",
-      "registerTitle": "REGISTER",
+      "loginTitle": "登录",
+      "registerTitle": "注册",
       "usernameOrEmail": "用户名或邮箱",
       "username": "用户名",
       "email": "邮箱",
@@ -431,5 +431,17 @@
         "emailInvalid": "邮箱格式不正确"
       }
     }
+  },
+  "theme": {
+    "toggle": "切换主题",
+    "light": "浅色",
+    "dark": "深色",
+    "system": "跟随系统"
+  },
+  "language": {
+    "switch": "切换语言",
+    "zh": "中文",
+    "en": "English",
+    "ja": "日本語"
   }
 }

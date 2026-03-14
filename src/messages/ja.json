@@ -9,6 +9,7 @@
     "en": "English",
     "ja": "日本語"
   },
+  "language": "日本語",
   "header": {
     "title": "AI-Era Web Dev Skills",
     "description": "AI-Era Web Dev Skills - フロントエンド開発者チャレンジプラットフォーム"
@@ -27,7 +28,89 @@
     "version": "バージョン",
     "versionNumber": "1.0.0",
     "description": "説明",
-    "descriptionContent": "AI時代フロントエンド開発者スキルチャレンジプラットフォーム"
+    "descriptionContent": "AI時代フロントエンド開発者スキルチャレンジプラットフォーム",
+    "pageTitle": "概要 — AI-Era",
+    "hero": {
+      "title": {
+        "line1": "開発者が本当に必要とする",
+        "line2": "トレーニング場を構築しています。"
+      },
+      "subtitle": {
+        "line1": "また別のチュートリアルサイトではありません。",
+        "line2": "また別のブートキャンプでもありません。",
+        "line3": "代替案にうんざりした開発者によって構築されたプラットフォームです。"
+      }
+    },
+    "mission": {
+      "label": "ミッション",
+      "badge": "進行中",
+      "lineNumber": "line: 001",
+      "problem": {
+        "paragraph1": "開発者の学び方は、働き方についていけていません。",
+        "paragraph2": "AIツールにはマニュアルが付属していませんでした。それらを使用する開発者に課せられた新しい期待もまた。"
+      },
+      "solution": {
+        "paragraph1": "**AI-Era** はそのギャップを埋めるために構築されました。",
+        "paragraph2": "**リアルなチャレンジ。リアルなバグ。リアルなAIコラボレーションパターン。** 月曜日のコードベースに備える実践的な練習。"
+      }
+    },
+    "founder": {
+      "name": "YourName",
+      "role": "創設者 & 開発者",
+      "handle": "yourhandle",
+      "comment": {
+        "line1": "自分が実際に使いたいプラットフォームが",
+        "line2": "見つからなかったので作りました。"
+      }
+    },
+    "team": {
+      "title": "チーム",
+      "subtitle": {
+        "line1": "オープンソースプロジェクトへの貢献者や",
+        "line2": "学び方を気にかける開発者を含みます。"
+      }
+    },
+    "openRoles": {
+      "title": "募集職種",
+      "description": {
+        "line1": "現在、正式な募集は行っていません。",
+        "line2": "しかし、開発者の学び方を気にかける人には常に興味があります。",
+        "line3": "もしそれがあなたなら："
+      },
+      "needsLabel": "ニーズ",
+      "needs": {
+        "frontend": "フロントエンド",
+        "backend": "バックエンド",
+        "content": "コンテンツ",
+        "devrel": "DevRel"
+      },
+      "cta": "GitHubでissueを開いてご連絡ください。"
+    },
+    "stack": {
+      "title": "技術スタック"
+    },
+    "contact": {
+      "title": "./contact.sh",
+      "links": {
+        "github": {
+          "label": "GitHub (バグ、機能、議論)"
+        },
+        "twitter": {
+          "label": "Twitter / X"
+        }
+      },
+      "email": "hello@ai-era.dev",
+      "okMessage": "[OK] すべて読んでいます。",
+      "newsletter": {
+        "title": "subscribe --monthly",
+        "description": {
+          "line1": "新しいチャレンジ、",
+          "line2": "プラットフォームアップデート、開発者リソースの最新情報をお届けします。"
+        },
+        "placeholder": "your@email.com",
+        "button": "購読"
+      }
+    }
   },
   "categories": {
     "ai": {
@@ -39,7 +122,7 @@
       "description": "コアなフロントエンドの基礎知識"
     },
     "performance": {
-      "name": "パフォーマンス",
+      "name": "パフォーマンス最適化",
       "description": "Webパフォーマンス最適化"
     },
     "network": {
@@ -70,7 +153,7 @@
   },
   "provider": {
     "google": "Google AI",
-    "doubao": "豆包",
+    "doubao": "Doubao",
     "z": "Z AI"
   },
   "providerPage": {
@@ -87,11 +170,11 @@
       }
     },
     "doubao": {
-      "title": "豆包",
-      "description": "豆包 AI API テスト",
+      "title": "Doubao",
+      "description": "Doubao AI API テスト",
       "settings": {
-        "title": "豆包設定",
-        "description": "豆包 API設定"
+        "title": "Doubao 設定",
+        "description": "Doubao API設定"
       }
     },
     "z": {
@@ -136,5 +219,230 @@
     "systemStatusDesc": "[OK]",
     "clearCache": "キャッシュをクリア",
     "clearCacheDesc": "ローカルストレージをクリア"
+  },
+  "headerNav": {
+    "docs": "ドキュメント"
+  },
+  "hero": {
+    "lines": [
+      "> AI-Era_",
+      "開発者トレーニングシステムを起動中...",
+      "[✓] フロントエンドチャレンジエンジン",
+      "[✓] AI支援コーディング",
+      "[✓] デバッグアリーナ",
+      "[✓] スキル進捗",
+      "システムオンライン"
+    ],
+    "seoText": "AI-Eraは、AI時代にリアルなWeb開発者スキルをトレーニングするゲーミフィケーション化されたプラットフォームです。",
+    "cta": {
+      "start": "チャレンジを開始",
+      "explore": "モジュールを探索"
+    }
+  },
+  "terminal": {
+    "connected": "> AI-Era に接続しました。コマンドを入力するか、下をクリックして開始してください。",
+    "placeholder": "コマンドを入力するか、下をクリックして開始",
+    "quickCommands": {
+      "start": "start",
+      "daily": "daily",
+      "modules": "modules",
+      "rank": "rank",
+      "sandbox": "sandbox"
+    },
+    "commands": {
+      "help": {
+        "title": "利用可能なコマンド：",
+        "helpDesc": "- このヘルプメッセージを表示",
+        "startDesc": "- 最初のチャレンジを開始",
+        "dailyDesc": "- 今日のデイリーチャレンジを実行",
+        "runDesc": "- 現在のチャレンジを実行（dailyが必要）",
+        "modulesDesc": "- チャレンジモジュールを閲覧",
+        "sandboxDesc": "- コードサンドボックスを開く",
+        "rankDesc": "- ランキングを表示",
+        "clearDesc": "- ターミナルをクリア"
+      },
+      "start": "ジャーニーを開始中...",
+      "daily": "デイリーチャレンジを読み込み中...",
+      "run": "エラー：アクティブなチャレンジがありません。チャレンジを開始するには 'daily' を実行してください。",
+      "modules": {
+        "title": "利用可能なモジュール：",
+        "frontend": "- フロントエンドチャレンジ",
+        "javascript": "- JavaScript 練習",
+        "react": "- React パターン",
+        "typescript": "- TypeScript 習得"
+      },
+      "sandbox": "サンドボックス環境を開いています...",
+      "rank": {
+        "title": "🏆 ランキング",
+        "entry": "#{rank}  {handle}   {points} pts"
+      },
+      "notFound": "コマンドが見つかりません：{cmd}。利用可能なコマンドは 'help' を入力してください。",
+      "notFoundHint": "利用可能なコマンドは 'help' を入力してください。"
+    }
+  },
+  "daily": {
+    "sectionTitle": "> デイリーミッション",
+    "broadcast": "ミッションブロードキャスト",
+    "active": "進行中",
+    "expires": "{time} で期限切れ",
+    "challengeId": "チャレンジID：",
+    "status": "ステータス：",
+    "statusValue": "[ 進行中 ]",
+    "expiresLabel": "期限：",
+    "difficulty": "難易度",
+    "time": "時間",
+    "xp": "XP",
+    "skills": "スキル：",
+    "execute": "[ 実行 ]",
+    "difficultyLevels": {
+      "easy": "簡単",
+      "intermediate": "中級",
+      "hard": "難しい"
+    }
+  },
+  "modules": {
+    "sectionTitle": "> ls -la /modules/",
+    "total": "{count} ディレクトリ、合計 {total} チャレンジ",
+    "items": {
+      "ui": {
+        "name": "ui_engineering",
+        "keywords": "react · レイアウト · アニメーション"
+      },
+      "js": {
+        "name": "javascript_core",
+        "keywords": "非同期 · クロージャ · ES2024"
+      },
+      "ai": {
+        "name": "ai_integration",
+        "keywords": "プロンプト · api · llm"
+      },
+      "debug": {
+        "name": "debugging",
+        "keywords": "トレース · コンソール · 修正"
+      },
+      "perf": {
+        "name": "performance",
+        "keywords": "レンダリング · バンドル · プロファイリング"
+      },
+      "system": {
+        "name": "system_design",
+        "keywords": "アーキテクチャ · パターン · スケール"
+      }
+    },
+    "challenges": "チャレンジ"
+  },
+  "activity": {
+    "sectionTitle": "> tail -f /var/log/activity.log",
+    "live": "ライブ",
+    "liveStats": "ライブ統計",
+    "topToday": "今日のトップ",
+    "stats": {
+      "online": "オンライン：",
+      "solving": "解決中：",
+      "today": "今日：",
+      "streak": "連続："
+    },
+    "streakUnit": "日",
+    "actions": {
+      "solved": "チャレンジ #{n} を解決",
+      "started": "チャレンジ #{n} を開始",
+      "reachedLevel": "レベル {l} に到達",
+      "completedModule": "{m} モジュールを完了",
+      "earnedBadge": "{b} バッジを獲得",
+      "submitted": "pull request を提出",
+      "fixedBug": "本番環境のバグを修正",
+      "deployed": "ステージングにデプロイ",
+      "passed": "すべてのテストケースをパス",
+      "unlocked": "新しいモジュールをアンロック",
+      "streak": "デイリー連続を完了",
+      "joined": "プラットフォームに参加"
+    },
+    "rankPrefix": "#{rank}",
+    "xpGain": "+{xp} xp"
+  },
+  "systemScan": {
+    "title": "システム",
+    "subtitle": "スキャン",
+    "diagnostics": "診断を実行中...",
+    "modulesLoaded": "{count} モジュールが読み込まれました",
+    "scanResults": {
+      "scanning": "スキャン中：",
+      "realFrontend": {
+        "title": "リアルフロントエンドチャレンジ",
+        "code": "#FC-001",
+        "description": "リアルなUIコンポーネントの構築と本番環境のバグ修正を練習。おもちゃの例はなし。手取り足取りの指導もなし。",
+        "tags": ["コンポーネント", "デバッグ", "リアルワールド"]
+      },
+      "aiAssisted": {
+        "title": "AI支援開発",
+        "code": "#AI-002",
+        "description": "AIツールと戦うのではなく協力する方法を学ぶ。未来のワークフローが今ここから始まる。",
+        "tags": ["llm", "copilot", "プロンプトエンジニアリング"]
+      },
+      "debugging": {
+        "title": "デバッグスキル",
+        "code": "#DB-003",
+        "description": "壊れた本番コードを読み修復する能力を鍛える。自信を持ってリリースしよう。",
+        "tags": ["コンソール", "トレース", "エラーハンドリング"]
+      }
+    }
+  },
+  "footer": {
+    "systemStatus": "> システムステータス",
+    "version": "バージョン：",
+    "versionValue": "v0.1.0",
+    "modules": "モジュール：",
+    "modulesValue": "6",
+    "challenges": "チャレンジ：",
+    "challengesValue": "180",
+    "uptime": "稼働時間：",
+    "uptimeValue": "42 日",
+    "status": "ステータス：",
+    "statusValue": "[OK] 稼働中",
+    "quickCommands": "クイックコマンド",
+    "typeToInteract": "> 入力して対話",
+    "links": {
+      "privacy": "プライバシー",
+      "terms": "利用規約",
+      "github": "GitHub",
+      "twitter": "Twitter"
+    },
+    "copyright": "© {year} AI-Era. All rights reserved."
+  },
+  "auth": {
+    "login": "ログイン",
+    "register": "登録",
+    "logout": "ログアウト",
+    "profile": "プロフィール",
+    "myChallenges": "マイチャレンジ",
+    "settings": "設定",
+    "modal": {
+      "loginTitle": "ログイン",
+      "registerTitle": "登録",
+      "usernameOrEmail": "ユーザー名またはメール",
+      "username": "ユーザー名",
+      "email": "メール",
+      "password": "パスワード",
+      "noAccount": "アカウントをお持ちでないですか？",
+      "haveAccount": "すでにアカウントをお持ちですか？",
+      "errors": {
+        "invalidCredentials": "ユーザー名またはパスワードが無効です",
+        "usernameTaken": "ユーザー名はすでに使用されています",
+        "passwordTooShort": "パスワードは8文字以上である必要があります",
+        "emailInvalid": "メールアドレスが無効です"
+      }
+    }
+  },
+  "theme": {
+    "toggle": "テーマを切り替え",
+    "light": "ライト",
+    "dark": "ダーク",
+    "system": "システム"
+  },
+  "language": {
+    "switch": "言語を切り替え",
+    "zh": "中文",
+    "en": "English",
+    "ja": "日本語"
   }
 }
