@@ -8,11 +8,23 @@ import type {
   UserProgressState,
   NodeStatus,
   AchievementUnlockEvent,
-  ProgressUpdateEvent,
-  Reward,
 } from './types';
 
 const STORAGE_KEY = 'roadmap_progress';
+
+const defaultUserState: UserProgressState = {
+  userId: 'user',
+  level: 1,
+  xp: 0,
+  totalXp: 0,
+  completedNodes: [],
+  completedBranches: [],
+  achievements: [],
+  currentStreak: 0,
+  longestStreak: 0,
+  lastActiveAt: new Date(),
+  nodeProgress: {},
+};
 
 interface UseRoadmapOptions {
   roadmap: Roadmap;
@@ -37,6 +49,7 @@ interface UseRoadmapReturn {
   getNodeById: (id: string) => RoadmapNode | undefined;
   getAvailableNodes: () => RoadmapNode[];
   getCompletedNodes: () => RoadmapNode[];
+  isLoaded: boolean;
 }
 
 export function useRoadmap({
@@ -44,44 +57,45 @@ export function useRoadmap({
   achievements,
   autoSave = true,
 }: UseRoadmapOptions): UseRoadmapReturn {
-  // Initialize user state
-  const [userState, setUserState] = useState<UserProgressState>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        try {
-          const parsed = JSON.parse(saved);
-          return {
-            ...parsed,
-            lastActiveAt: new Date(parsed.lastActiveAt),
-          };
-        } catch {
-          // Invalid saved data
-        }
-      }
-    }
-    return {
-      userId: 'user',
-      level: 1,
-      xp: 0,
-      totalXp: 0,
-      completedNodes: [],
-      completedBranches: [],
-      achievements: [],
-      currentStreak: 0,
-      longestStreak: 0,
-      lastActiveAt: new Date(),
-      nodeProgress: {},
-    };
-  });
+  const [isLoaded, setIsLoaded] = useState(false);
+  
+  // Initialize user state with default values (for SSR)
+  const [userState, setUserState] = useState<UserProgressState>(defaultUserState);
 
-  // Initialize nodes with status
+  // Initialize nodes with status (for SSR)
   const [nodes, setNodes] = useState<RoadmapNode[]>(() => {
     return roadmap.nodes.map((node) => ({
       ...node,
       status: calculateInitialStatus(node, roadmap.nodes),
     }));
   });
+
+  // Load from localStorage on client side only
+  useEffect(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        setUserState({
+          ...parsed,
+          lastActiveAt: new Date(parsed.lastActiveAt),
+        });
+        
+        // Restore node statuses based on saved progress
+        setNodes((prevNodes) => {
+          return prevNodes.map((node) => ({
+            ...node,
+            status: parsed.completedNodes.includes(node.id) 
+              ? 'completed' 
+              : calculateInitialStatus(node, prevNodes),
+          }));
+        });
+      } catch {
+        // Invalid saved data, use defaults
+      }
+    }
+    setIsLoaded(true);
+  }, []);
 
   // Calculate progress
   const progress = useMemo(() => {
@@ -107,10 +121,10 @@ export function useRoadmap({
 
   // Save to localStorage
   useEffect(() => {
-    if (autoSave && typeof window !== 'undefined') {
+    if (autoSave && isLoaded && typeof window !== 'undefined') {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(userState));
     }
-  }, [userState, autoSave]);
+  }, [userState, autoSave, isLoaded]);
 
   // Calculate initial status based on dependencies
   function calculateInitialStatus(
@@ -241,19 +255,7 @@ export function useRoadmap({
 
   // Reset progress
   const resetProgress = useCallback(() => {
-    setUserState({
-      userId: 'user',
-      level: 1,
-      xp: 0,
-      totalXp: 0,
-      completedNodes: [],
-      completedBranches: [],
-      achievements: [],
-      currentStreak: 0,
-      longestStreak: 0,
-      lastActiveAt: new Date(),
-      nodeProgress: {},
-    });
+    setUserState(defaultUserState);
 
     setNodes(
       roadmap.nodes.map((node) => ({
@@ -297,5 +299,6 @@ export function useRoadmap({
     getNodeById,
     getAvailableNodes,
     getCompletedNodes,
+    isLoaded,
   };
 }

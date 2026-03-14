@@ -14,6 +14,7 @@ type Tab = 'roadmap' | 'achievements';
 export default function RoadmapPage() {
   const [activeTab, setActiveTab] = useState<Tab>('roadmap');
   const [recentUnlocks, setRecentUnlocks] = useState<Achievement[]>([]);
+  const [isClient, setIsClient] = useState(false);
 
   const {
     nodes,
@@ -24,11 +25,17 @@ export default function RoadmapPage() {
     updateNodeStatus,
     checkAchievements,
     resetProgress,
+    isLoaded,
   } = useRoadmap({
     roadmap: sampleRoadmap,
     achievements: sampleAchievements,
     autoSave: true,
   });
+
+  // Mark as client-side rendered
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Check for new achievements when nodes change
   useEffect(() => {
@@ -42,6 +49,22 @@ export default function RoadmapPage() {
   const dismissToast = useCallback((achievementId: string) => {
     setRecentUnlocks((prev) => prev.filter((a) => a.id !== achievementId));
   }, []);
+
+  // Show loading state until client-side hydration is complete
+  if (!isClient || !isLoaded) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-lg font-bold" style={{ fontFamily: 'JetBrains Mono, monospace' }}>
+            &gt; LOADING_ROADMAP<span className="animate-blink">█</span>
+          </p>
+          <p className="text-sm text-muted-foreground mt-2">
+            $ initializing...
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen">
