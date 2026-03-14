@@ -1,47 +1,59 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import { TerminalCanvas } from "./components/TerminalCanvas"
-import { PanelZone } from "./components/PanelZone"
-import { TerminalCursor } from "./components/TerminalCursor"
+import { SectionDivider } from "./components/SectionDivider"
+import { MissionSection } from "./components/MissionSection"
+import { FounderSection } from "./components/FounderSection"
+import { TeamSection } from "./components/TeamSection"
+import { StackSection } from "./components/StackSection"
+import { OpenRolesSection } from "./components/OpenRolesSection"
+import { ContactSection } from "./components/ContactSection"
+import { NewsletterSection } from "./components/NewsletterSection"
 
 export default function AboutPage() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
-  const [uptime, setUptime] = useState("00:00:00")
-
-  useEffect(() => {
-    const startTime = Date.now()
-    
-    const interval = setInterval(() => {
-      const elapsed = Date.now() - startTime
-      const hours = Math.floor(elapsed / 3600000)
-      const minutes = Math.floor((elapsed % 3600000) / 60000)
-      const seconds = Math.floor((elapsed % 60000) / 1000)
-      
-      setUptime(`${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`)
-    }, 1000)
-
-    return () => clearInterval(interval)
-  }, [])
-
-  const handleMouseMove = (x: number, y: number) => {
-    setMousePos({ x, y })
-  }
-
   return (
-    <div className="h-screen w-full overflow-hidden flex flex-col cursor-none">
-      {/* Custom Cursor */}
-      <TerminalCursor />
+    <div className="min-h-screen">
+      {/* Canvas Zone (70vh) - Unchanged */}
+      <TerminalCanvas />
 
-      {/* Canvas Zone (70vh) */}
-      <TerminalCanvas onMouseMove={handleMouseMove} />
+      {/* Content Area - Scrollable */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+        {/* Section Divider 1 */}
+        <SectionDivider current={1} total={4} />
 
-      {/* Panel Zone (30vh) */}
-      <PanelZone
-        uptime={uptime}
-        mouseX={mousePos.x}
-        mouseY={mousePos.y}
-      />
+        {/* Section 1: MISSION */}
+        <MissionSection />
+
+        {/* Section Divider 2 */}
+        <SectionDivider current={2} total={4} />
+
+        {/* Section 2: FOUNDER + TEAM */}
+        <section className="py-16 md:py-20">
+          <FounderSection />
+          <TeamSection />
+        </section>
+
+        {/* Section Divider 3 */}
+        <SectionDivider current={3} total={4} />
+
+        {/* Section 3: STACK */}
+        <StackSection />
+
+        {/* Section Divider 4 */}
+        <SectionDivider current={4} total={4} />
+
+        {/* Section 4: OPEN_ROLES + CONTACT */}
+        <section className="py-16 md:py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+            <OpenRolesSection />
+            <ContactSection />
+          </div>
+          <NewsletterSection />
+        </section>
+
+        {/* Bottom Spacing */}
+        <div className="h-20" />
+      </div>
     </div>
   )
 }

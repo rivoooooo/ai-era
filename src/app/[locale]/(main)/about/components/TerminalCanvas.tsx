@@ -1,31 +1,14 @@
 "use client"
 
-import { useEffect, useRef, useCallback } from "react"
-import { useTextScramble } from "../hooks/useTextScramble"
+import { useEffect, useRef } from "react"
 
-interface TerminalCanvasProps {
-  onMouseMove?: (x: number, y: number) => void
-}
-
-export function TerminalCanvas({ onMouseMove }: TerminalCanvasProps) {
+export function TerminalCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const headlineRef = useRef<HTMLDivElement>(null)
-  const scramble = useTextScramble()
 
   const chars = "01>$#[]|─░▒▓ .,:;"
   const mousePos = useRef({ x: -1000, y: -1000 })
   const scanY = useRef(0)
   const time = useRef(0)
-
-  const handleMouseMove = useCallback((e: MouseEvent) => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const rect = canvas.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
-    mousePos.current = { x, y }
-    onMouseMove?.(e.clientX, e.clientY)
-  }, [onMouseMove])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -38,6 +21,14 @@ export function TerminalCanvas({ onMouseMove }: TerminalCanvasProps) {
       canvas.width = canvas.offsetWidth * window.devicePixelRatio
       canvas.height = canvas.offsetHeight * window.devicePixelRatio
       ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
+    }
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect()
+      mousePos.current = {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      }
     }
 
     resize()
@@ -118,13 +109,7 @@ export function TerminalCanvas({ onMouseMove }: TerminalCanvasProps) {
       canvas.removeEventListener("mousemove", handleMouseMove)
       cancelAnimationFrame(animationId)
     }
-  }, [handleMouseMove])
-
-  const handleMouseEnter = () => {
-    if (headlineRef.current) {
-      scramble(headlineRef.current, "We are building the training ground\ndevelopers actually need.")
-    }
-  }
+  }, [])
 
   return (
     <div className="relative h-[70vh] w-full overflow-hidden border-b border-border">
@@ -146,9 +131,7 @@ export function TerminalCanvas({ onMouseMove }: TerminalCanvasProps) {
       {/* Headline */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 w-full max-w-7xl px-8">
         <div
-          ref={headlineRef}
-          onMouseEnter={handleMouseEnter}
-          className="font-bold text-foreground cursor-none"
+          className="font-bold text-foreground"
           style={{
             fontSize: "clamp(28px, 4vw, 48px)",
             lineHeight: 1.2,
@@ -160,7 +143,7 @@ export function TerminalCanvas({ onMouseMove }: TerminalCanvasProps) {
           developers actually need.
         </div>
         <div className="mt-3 text-xs text-muted-foreground italic font-mono">
-          // Exploring the delta between learning and doing.
+          {"// Exploring the delta between learning and doing."}
         </div>
       </div>
     </div>
