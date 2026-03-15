@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X, Terminal } from "lucide-react";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ModeToggle } from "@/components/mode-toggle";
@@ -21,11 +21,12 @@ export function Header() {
   const locale = useLocale();
   const t = useTranslations("nav");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isMac] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    return navigator.platform.toUpperCase().indexOf("MAC") >= 0;
-  });
+  const [isMac, setIsMac] = useState(false);
   const { setOpen } = useCommandPalette();
+
+  useEffect(() => {
+    setIsMac(navigator.platform.toUpperCase().indexOf("MAC") >= 0);
+  }, []);
 
   const navItems: NavItem[] = [
     { href: `/${locale}`, label: t("home") },
