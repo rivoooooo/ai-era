@@ -5,9 +5,14 @@ import { THEME_COLORS, applyThemeColor, getStoredThemeColor, type ThemeColorId }
 
 export function ThemeSwitcher() {
   const [open, setOpen] = useState(false)
-  const [current, setCurrent] = useState<ThemeColorId>(() => getStoredThemeColor())
-  const [mounted, setMounted] = useState(true)
+  const [current, setCurrent] = useState<ThemeColorId>('phosphor')
+  const [mounted, setMounted] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    setMounted(true)
+    setCurrent(getStoredThemeColor())
+  }, [])
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
