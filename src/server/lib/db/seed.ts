@@ -1552,7 +1552,6 @@ body { min-height: 100vh; display: flex; flex-wrap: wrap; gap: 30px; align-items
       displayOrder: 1,
     },
   ];
-
   const insertedResources = await db
     .insert(challengeResources)
     .values(resourceData)
@@ -1567,3 +1566,5 @@ seedData()
     console.error('Seeding failed:', error);
     process.exit(1);
   });
+
+export { seedData };

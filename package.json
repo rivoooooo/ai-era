@@ -7,10 +7,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "postinstall": "bun run db:push",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
-    "db:seed": "bun run src/server/lib/db/seed.ts"
+    "db:seed": "bun run src/server/lib/db/seed.ts",
+    "db:setup": "bun run db:push && bun run db:seed",
+    "deploy": "bun run build && bun run start",
+    "deploy:prod": "bun run db:setup && bun run deploy"
   },
   "dependencies": {
     "@base-ui/react": "^1.2.0",

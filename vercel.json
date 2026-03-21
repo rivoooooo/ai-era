@@ -1,0 +1,5 @@
+{
+  "buildCommand": "bun run db:push && bun run build",
+  "installCommand": "bun install",
+  "framework": "nextjs"
+}
