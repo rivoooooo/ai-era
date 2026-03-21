@@ -432,6 +432,33 @@
       }
     }
   },
+  "profile": {
+    "title": "用户资料",
+    "memberSince": "注册时间",
+    "stats": {
+      "title": "数据统计",
+      "xp": "经验值",
+      "challenges": "挑战",
+      "completed": "已完成",
+      "inProgress": "进行中",
+      "rank": "排名",
+      "streak": "连续",
+      "days": "天"
+    },
+    "recentActivity": {
+      "title": "最近活动",
+      "noActivity": "暂无活动记录",
+      "completed": "已完成",
+      "started": "已开始"
+    },
+    "achievements": {
+      "title": "成就",
+      "unlocked": "已解锁",
+      "total": "总计"
+    },
+    "loading": "加载资料中...",
+    "error": "加载资料失败"
+  },
   "theme": {
     "toggle": "切换主题",
     "light": "浅色",

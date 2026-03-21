@@ -432,6 +432,33 @@
       }
     }
   },
+  "profile": {
+    "title": "USER PROFILE",
+    "memberSince": "Member since",
+    "stats": {
+      "title": "STATS",
+      "xp": "XP",
+      "challenges": "Challenges",
+      "completed": "Completed",
+      "inProgress": "In Progress",
+      "rank": "Rank",
+      "streak": "Streak",
+      "days": "days"
+    },
+    "recentActivity": {
+      "title": "RECENT ACTIVITY",
+      "noActivity": "No recent activity",
+      "completed": "Completed",
+      "started": "Started"
+    },
+    "achievements": {
+      "title": "ACHIEVEMENTS",
+      "unlocked": "Unlocked",
+      "total": "Total"
+    },
+    "loading": "Loading profile...",
+    "error": "Failed to load profile"
+  },
   "theme": {
     "toggle": "Toggle theme",
     "light": "Light",
