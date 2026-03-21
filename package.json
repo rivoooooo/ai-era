@@ -13,6 +13,7 @@
     "db:push": "drizzle-kit push",
     "db:seed": "bun run src/server/lib/db/seed.ts",
     "db:setup": "bun run db:push && bun run db:seed",
+    "db:studio": "drizzle-kit studio",
     "deploy": "bun run build && bun run start",
     "deploy:prod": "bun run db:setup && bun run deploy"
   },
